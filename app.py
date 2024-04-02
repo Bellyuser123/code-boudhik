@@ -13,9 +13,9 @@ with open('config.json') as c:
 app = Flask(__name__)
 base_dir = os.path.abspath(os.path.dirname(__file__))
 if local_server:
-    app.config['SQLALCHEMY_DATABASE_URI'] = params['local_uri'] + os.path.join(base_dir, '.data', 'database.db')
+    app.config['SQLALCHEMY_DATABASE_URI'] = params['local_uri'] + os.path.join(base_dir, 'instance', 'database.db')
 else:
-    app.config['SQLALCHEMY_DATABASE_URI'] = params['prod_uri'] + os.path.join(base_dir, '.data', 'database.db')
+    app.config['SQLALCHEMY_DATABASE_URI'] = params['prod_uri'] + os.path.join(base_dir, 'instance', 'database.db')
 app.config.update(
     MAIL_SERVER='smtp.gmail.com',
     MAIL_PORT=587,
@@ -85,6 +85,11 @@ def blog_sec():
     prev = page - 1 if page > 1 else '#'
     after = page + 1 if page < last else '#'
     return render_template('blog.html', params=params, posts=posts, prev=prev, after=after)
+
+@app.route("/blog/<string:blog_slug>")
+def blogs(blog_slug):
+    post = Posts.query.filter_by(slug=blog_slug).first()
+    return render_template('blog1.html', params=params, post=post)
   
 @app.route('/dashboard')
 def dashboard():
