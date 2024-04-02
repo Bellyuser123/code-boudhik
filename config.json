@@ -1,8 +1,8 @@
 {
   "params": {
     "local_server": "True",
-    "local_uri": "mysql+mysqlconnector://root:@localhost/mybulletin",
-    "prod_uri": "mysql+mysqlconnector://root:@localhost/mybulletin",
+    "local_uri": "sqlite:///",
+    "prod_uri": "sqlite:///",
     "gmail_user": "boudhik.chawda72@gmail.com",
     "gmail_passwd": "pgrk quxd zxoo secr",
     "num_side_proj": 2,

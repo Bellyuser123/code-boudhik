@@ -2,15 +2,31 @@ from flask import Flask, render_template, request
 from flask_sqlalchemy import SQLAlchemy
 import datetime
 import os
+import json
 
+local_server = True
 with open('config.json') as c:
     params = json.load(c)["params"]
 
 app = Flask(__name__)
-
 base_dir = os.path.abspath(os.path.dirname(__file__))
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + os.path.join(base_dir, '.data', 'database.db')
+if local_server:
+    app.config['SQLALCHEMY_DATABASE_URI'] = params['local_uri'] + os.path.join(base_dir, '.data', 'database.db')
+else:
+    app.config['SQLALCHEMY_DATABASE_URI'] = params['prod_uri'] + os.path.join(base_dir, '.data', 'database.db')
+app.config.update(
+    MAIL_SERVER='smtp.gmail.com',
+    MAIL_PORT=587,
+    MAIL_USE_TLS=True,
+    MAIL_USERNAME=params['gmail_user'],
+    MAIL_PASSWORD=params['gmail_passwd'],
+    MAIL_DEFAULT_SENDER=params['gmail_user']
+)
+mail = Mail(app)
+
 db = SQLAlchemy(app)
+
+
 
 class Contacts(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -33,8 +49,19 @@ def cont_sec():
     entry = Contacts(name=name, email=email, message=message)
     db.session.add(entry)
     db.session.commit()
+    subject = 'New Message From Your Website'
+    recipient_email = params['gmail_user']
+
+    msg = Message(subject, recipients=[recipient_email])
+    msg.body = f"Name: {name}\n\nEmail: {email}\n\nMessage Content: {msg_content}"
+
+    mail.send_message('New Feedback Form Your Website',
+                      sender=email,
+                      recipients=[params['gmail_user']],
+                      body=str(msg)
+                      )
     print("Message submitted successfully!")
-  return render_template('contact.html')
+  return render_template('contact.html', params=params)
   
 @app.route('/blog')
 def blog_sec():
