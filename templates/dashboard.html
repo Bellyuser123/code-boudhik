@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="relative"
+      style="background-image: url('https://cdn.glitch.global/2d9ffa8a-6165-4ffb-abec-3674c231adcf/admin_bg.jpg?v=1710244826655') ; background-size: 100%; background-position: center; background-repeat: no-repeat;">
+<div class="absolute inset-0 bg-black opacity-90"></div>
+<section class="h-screen flex flex-col items-center justify-center bg-cover bg-center relative"
+         style="background-image: url('https://cdn.glitch.global/2d9ffa8a-6165-4ffb-abec-3674c231adcf/admin_panel.jpg?v=1710244827985'); background-size: 80%; height: 30vh;">
+    <div class="absolute inset-0 bg-black opacity-40"></div>
+    <header class="text-gray-300 body-font bg-transparent absolute top-0 w-full z-50">
+        <div class="container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center">
+            <nav class="flex lg:w-2/5 flex-wrap items-center text-base md:ml-auto">
+                <form method="post" action="{{ url_for('dashboard') }}">
+                    <input type="hidden" name="table_type" value="projects">
+                    <button type="submit" class="px-4 py-2 hover:text-gray-400">Projects</button>
+                </form>
+                <form method="post" action="{{ url_for('dashboard') }}">
+                    <input type="hidden" name="table_type" value="posts">
+                    <button type="submit" class="px-4 py-2 hover:text-gray-400">Posts</button>
+                </form>
+                <a class="px-4 py-2 hover:text-gray-400" href="/home">Back to web</a>
+            </nav>
+            <a class="flex order-first lg:order-none lg:w-1/5 title-font font-medium items-center text-gray-300 lg:items-center lg:justify-center mb-4 md:mb-0">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round"
+                     stroke-linejoin="round" stroke-width="2" class="w-10 h-10 text-white p-2 bg-red-500 rounded-full"
+                     viewBox="0 0 24 24">
+                    <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path>
+                </svg>
+                <span class="ml-3 text-xl">BTHON</span>
+            </a>
+            <div class="lg:w-2/5 inline-flex lg:justify-end ml-5 lg:ml-0">
+                <button class="inline-flex items-center bg-transparent border-0 py-1 px-3 focus:outline-none hover:bg-gray-500 rounded text-base mt-4 md:mt-0">
+                    <a href="/logout">Logout</a>
+                    <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                         stroke-width="2" class="w-4 h-4 ml-1" viewBox="0 0 24 24">
+                        <path d="M5 12h14M12 5l7 7-7 7"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </header>
+    <div class="text-center z-10 mt-12 md:mt-12">
+        <h4 class="text-4xl text-green-200 md:text-4xl font-bold leading-tight mb-4">ADMIN PANEL</h4>
+        <p class="text-lg text-green-200 md:text-xl">Welcome to Admin Panel</p>
+    </div>
+</section>
+
+<section class="h-screen relative">
+    <div class="container mx-auto relative z-10">
+        <div class="pt-6">
+
+            <div class="flex items-center space-x-4">
+                <h1 class="text-lg text-gray-400 md:text-2xl pb-2">Add a new {{table_type}} :</h1>
+                <button class="inline-flex text-gray-200 bg-indigo-500 border-0 py-1 px-4 focus:outline-none hover:bg-indigo-600 rounded text-lg">
+                    <a href="{{ url_for('editing_sec', table_type=table_type, serial='new') }}">ADD</a>
+                </button>
+            </div>
+            <div class="flex items-center space-x-4">
+                <h1 class="text-lg text-gray-400 md:text-2xl pb-2">Upload Files :</h1>
+                <form action="/uploader" method="post" enctype="multipart/form-data">
+                    <input type="file" name="file1" class="text-lg text-gray-400">
+                    <button type="submit"
+                            class="inline-flex text-gray-200 bg-indigo-500 border-0 py-1 px-4 focus:outline-none hover:bg-indigo-600 rounded text-lg">
+                        Upload
+                    </button>
+                </form>
+            </div>
+            <div class="container px-1 py-3 mx-auto">
+                <div class="h-1 bg-gray-600 rounded overflow-hidden">
+                    <div class="h-full bg-gray-700"></div>
+                </div>
+            </div>
+            <h1 class="text-lg text-gray-400 md:text-2xl pb-4">Edit/Delete {{table_type}} :</h1>
+            <table class="min-w-full bg-white border border-gray-300">
+                <thead>
+                <tr>
+                    <th class="py-2 px-2 border-b bg-gray-100">Serial</th>
+                    <th class="py-2 px-4 border-b bg-gray-100">Title</th>
+                    <th class="py-2 px-4 border-b bg-gray-100">Slug</th>
+                    <th class="py-2 px-4 border-b bg-gray-100">Date</th>
+                    <th class="py-2 px-4 border-b bg-gray-100">Edit</th>
+                    <th class="py-2 px-4 border-b bg-gray-100">Delete</th>
+                </tr>
+                </thead>
+                {% for section in data %}
+                <tbody>
+                <tr>
+                    <td align="center" class="py-2 px-1 border-b">{{section.serial}}</td>
+                    <td class="py-2 px-6 border-b">{{section.title}}</td>
+                    <td class="py-2 px-4 border-b">{{section.slug}}</td>
+                    <td align="center" class="py-2 px-2 border-b">{{section.date}}</td>
+                    <td align="center" class="py-2 px-1 border-b">
+                        <button class="inline-flex text-gray-700 bg-gray-200 border-0 py-2 px-6 focus:outline-none hover:bg-gray-300 rounded text-lg">
+                            <a href="{{ url_for('editing_sec', table_type=table_type, serial=section.serial) }}">Edit</a>
+                        </button>
+                    </td>
+                    <td align="center" class="py-2 px-1 border-b">
+                        <button class="inline-flex text-gray-700 bg-gray-200 border-0 py-2 px-6 focus:outline-none hover:bg-gray-300 rounded text-lg">
+                            <a href="{{ url_for('delete', table_type=table_type, serial=section.serial) }}">Delete</a>
+                        </button>
+                    </td>
+                </tr>
+                </tbody>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+</section>
+
+</body>
+</html>
