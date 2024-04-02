@@ -7,12 +7,12 @@ app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + os.path.join('.data', 'contacts.db')
 db = SQLAlchemy(app)
 
-class Message(db.Model):
+class Contacts(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(80), nullable=False)
     email = db.Column(db.String(120), nullable=False)
     message = db.Column(db.Text, nullable=False)
-    date = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
+    date = db.Column(db.DateTime, nullable=False)
 
 
 @app.route('/')
@@ -25,7 +25,8 @@ def cont_sec():
     name = request.form.get('name')
     email = request.form.get('email')
     message = request.form.get('message')
-    entry = Contacts(name=name, email=email, message=message)
+    date = datetime.now 
+    entry = Contacts(name=name, email=email, message=message, date=date)
     db.session.add(entry)
     db.session.commit()
     print("Message submitted successfully!")
