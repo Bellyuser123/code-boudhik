@@ -1,0 +1,15 @@
+{
+  "params": {
+    "local_server": "True",
+    "local_uri": "mysql+mysqlconnector://root:@localhost/mybulletin",
+    "prod_uri": "mysql+mysqlconnector://root:@localhost/mybulletin",
+    "gmail_user": "boudhik.chawda72@gmail.com",
+    "gmail_passwd": "pgrk quxd zxoo secr",
+    "num_side_proj": 2,
+    "num_side_post": 5,
+    "num_index": 3,
+    "admin_user": "BOT_boudhik_super",
+    "admin_password": "I Love Boudhik",
+    "upload_location": "C:\\Users\\MSI\\PycharmProjects\\web_test\\static"
+  }
+}
