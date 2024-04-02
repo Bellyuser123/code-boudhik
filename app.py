@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request
 from flask_sqlalchemy import SQLAlchemy
+from flask_mail import Mail, Message
 import datetime
 import os
 import json
@@ -53,7 +54,7 @@ def cont_sec():
     recipient_email = params['gmail_user']
 
     msg = Message(subject, recipients=[recipient_email])
-    msg.body = f"Name: {name}\n\nEmail: {email}\n\nMessage Content: {msg_content}"
+    msg.body = f"Name: {name}\n\nEmail: {email}\n\nMessage Content: {message}"
 
     mail.send_message('New Feedback Form Your Website',
                       sender=email,
