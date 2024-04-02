@@ -1,0 +1,50 @@
+<head>
+    <title>About me</title>
+</head>
+
+{% extends "layout.html" %}
+{% block body %}
+
+<section class="text-gray-600 body-font">
+    <div class="container px-5 py-19 mx-auto flex flex-col">
+        <div class="lg:w-4/6 mx-auto">
+            <div class="rounded-lg h-64 overflow-hidden">
+                <img alt="content" class="object-cover object-center h-full w-full"
+                     src= "https://cdn.glitch.global/2d9ffa8a-6165-4ffb-abec-3674c231adcf/notebook-1971495_1280.jpg?v=1712050029995">
+            </div>
+            <div class="flex flex-col sm:flex-row mt-10">
+                <div class="sm:w-1/3 text-center sm:pr-8 sm:py-8">
+                    <div class="w-20 h-20 rounded-full inline-flex items-center justify-center bg-gray-200 text-gray-400">
+                        <img class="rounded-full" border="200" src="https://cdn.glitch.global/2d9ffa8a-6165-4ffb-abec-3674c231adcf/aaa.jpg?v=1712050073368">
+                    </div>
+                    <div class="flex flex-col items-center text-center justify-center">
+                        <h2 class="font-medium title-font mt-4 text-gray-900 text-lg">Boudhik Chawda</h2>
+                        <div class="w-12 h-1 bg-indigo-500 rounded mt-2 mb-4"></div>
+                        <p class="text-base">Namaste🙏🏻! I'm Boudhik, a 12th-grade student from the vibrant land of
+                            India. As I navigate through the final year of school, I'm also immersed in a world of
+                            algorithms, loops, and code. Welcome to my digital space, where I unravel the story of my
+                            programming journey.</p>
+                    </div>
+                </div>
+                <div class="sm:w-2/3 sm:pl-8 sm:py-8 sm:border-l border-gray-300 sm:border-t-0 border-t mt-4 pt-4 sm:mt-0 text-center sm:text-left">
+                    <p class="leading-relaxed text-lg mb-4">It all began when I discovered the fascinating world of
+                        programming. From the first "Hello, World!" to conquering complex algorithms, my journey in
+                        programming has been nothing short of an adventure. Each line of code is a step forward in
+                        unraveling the mysteries of this digital realm.</p>
+                    <p class="leading-relaxed text-lg mb-4">As a 12th-grade student, my days are filled with textbooks
+                        and exams, but my evenings are dedicated to the glow of a computer screen. I've embarked on a
+                        mission to learn the languages that power the digital landscape. From HTML to Python, I'm
+                        exploring the syntax and semantics that bring ideas to life.</p>
+                    <a class="text-indigo-500 inline-flex items-center">Continue Reading
+                        <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                             stroke-width="2" class="w-4 h-4 ml-2" viewBox="0 0 24 24">
+                            <path d="M5 12h14M12 5l7 7-7 7"></path>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock %}

@@ -90,6 +90,9 @@ def blog_sec():
 def dashboard():
     return render_template('dashboard.html')
 
+@app.route('/about')
+def abt_sec():
+    return render_template('about.html')
   
 if __name__ == '__main__':
     with app.app_context():
