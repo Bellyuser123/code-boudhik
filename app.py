@@ -3,6 +3,9 @@ from flask_sqlalchemy import SQLAlchemy
 import datetime
 import os
 
+with open('config.json') as c:
+    params = json.load(c)["params"]
+
 app = Flask(__name__)
 
 base_dir = os.path.abspath(os.path.dirname(__file__))
@@ -35,7 +38,19 @@ def cont_sec():
   
 @app.route('/blog')
 def blog_sec():
-    return render_template('blog.html')
+    posts = Posts.query.filter_by().all()
+    last = math.ceil(len(posts) / int(params['num_side_post']))
+    page = request.args.get('page', 1, type=int)
+    page = int(page)
+    offset = (page - 1) * int(params['num_side_post'])
+    posts = posts[offset:offset + int(params['num_side_post'])]
+    prev = page - 1 if page > 1 else '#'
+    after = page + 1 if page < last else '#'
+    return render_template('blog.html', params=params, posts=posts, prev=prev, after=after)
+  
+@app.route('/dashboard')
+def dashboard():
+    return render_template('dashboard.html')
 
   
 if __name__ == '__main__':

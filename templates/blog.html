@@ -1,8 +1,56 @@
-<html>
-  <head>
-    <title>Blogs</title>
-  </head>
-  <body>
-    BLOGS Here
-  </body>
-</html>
+<head>
+    <title>Posts</title>
+</head>
+
+{% extends "layout.html" %}
+{% block body %}
+
+<section class="text-gray-600 body-font overflow-hidden">
+    <div class="container px-5 py-19.9 mx-auto">
+        <div class="flex flex-col text-center w-full mb-20">
+            <h2 class="text-xs text-indigo-500 tracking-widest font-medium title-font mb-1"><a href="/about">By
+                Boudhik</a></h2>
+            <h1 class="sm:text-3xl text-2xl font-medium title-font mb-4 text-gray-900">BLOGS</h1>
+            <div class="container px-5 py-3 mx-auto">
+                <div class="h-1 bg-gray-200 rounded overflow-hidden">
+                    <div class="h-full bg-slate-300"></div>
+                </div>
+            </div>
+        </div>
+        <div class="-my-8 divide-y-2 divide-gray-100">
+            {% for post in posts %}
+            <div class="py-6 flex flex-wrap md:flex-nowrap">
+                <div class="md:w-64 md:mb-0 mb-6 flex-shrink-0 flex flex-col">
+                    <span class="font-semibold title-font text-gray-700">Posted On</span>
+                    <span class="mt-1 text-gray-500 text-sm">{{post.date}}</span>
+                </div>
+                <div class="md:flex-grow">
+                    <h2 class="text-2xl font-medium text-gray-900 title-font mb-2">{{post.title}}</h2>
+                    <p class="leading-relaxed">{{post.content[0:185]}}...</p>
+                    <a class="text-indigo-500 inline-flex items-center mt-4" href="/blog/{{post.slug}}">Learn More
+                        <svg class="w-4 h-4 ml-2" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="none"
+                             stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M5 12h14"></path>
+                            <path d="M12 5l7 7-7 7"></path>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        <div>
+            <div class="clearfix mt-10">
+                {% if prev != "#" %}
+                <a class="bg-indigo-500 text-white border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded text-lg float-left"
+                   href="/blog?page={{ prev }}">&larr; Newer Posts</a>
+                {% endif %}
+                {% if after != "#" %}
+                <a class="bg-indigo-500 text-white border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded text-lg float-right"
+                   href="/blog?page={{ after }}">Older Posts &rarr;</a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock %}
