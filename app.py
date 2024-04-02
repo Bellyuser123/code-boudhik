@@ -35,6 +35,15 @@ class Contacts(db.Model):
     email = db.Column(db.String(120), nullable=False)
     message = db.Column(db.Text, nullable=False)
     date = db.Column(db.DateTime, nullable=False, default=datetime.datetime.utcnow)
+    
+class Posts(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    title = db.Column(db.String(100), nullable=False)
+    content = db.Column(db.String(120), nullable=False)
+    slug = db.Column(db.String(100), nullable=False)
+    image = db.Column(db.String(255), nullable=False)
+    message = db.Column(db.Text, nullable=False)
+    date = db.Column(db.DateTime, nullable=False, default=datetime.datetime.utcnow)
 
 
 @app.route('/')
