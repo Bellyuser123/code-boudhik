@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request
 from flask_sqlalchemy import SQLAlchemy
 from flask_mail import Mail, Message
+import math
 import datetime
 import os
 import json
@@ -75,7 +76,7 @@ def cont_sec():
   
 @app.route('/blog')
 def blog_sec():
-    posts = Posts.query.filter_by().all()
+    posts = Posts.query.all()
     last = math.ceil(len(posts) / int(params['num_side_post']))
     page = request.args.get('page', 1, type=int)
     page = int(page)
