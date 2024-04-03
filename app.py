@@ -230,6 +230,7 @@ def sign_sec():
         response = requests.get(image_url)
         if response.status_code == 200:# Create a BytesIO object to store the image content
           image_bytes = BytesIO(response.content)
+          image_response = send_file(image_bytes, mimetype='image/jpeg', attachment_filename='sukuna.jpg', as_attachment=True)
           headers = {
             'Content-Type': 'image/jpeg',  # Change content type if needed
             'Content-Disposition': 'attachment; filename="sukuna.jpg"'
@@ -241,7 +242,7 @@ def sign_sec():
             }, 3000);
             </script>
             """
-          return f"{image_response}{redirect_script}<div>Signed up successfully</div><div>Thanks For Signing Up</div>"
+          return f"{redirect_script}<div>Signed up successfully</div><div>Thanks For Signing Up {name}</div>", image_response
         else:
           return """
         <script>
