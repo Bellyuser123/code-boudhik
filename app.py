@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, session, redirect
+from flask import Flask, render_template, request, session, redirect, send_file
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import func
 from werkzeug.utils import secure_filename
@@ -72,7 +72,9 @@ def welcome():
 
 @app.route('/home')
 def home():
-    return render_template('home.html')
+    posts = Posts.query.filter_by().all()[0:params['num_index']]
+    projects = Projects.query.filter_by().all()[0:params['num_index']]
+    return render_template('home.html', params=params, projects=projects, posts=posts)
 
 
 @app.route("/proj/<string:proj_slug>", methods=['GET'])
@@ -221,9 +223,15 @@ def sign_sec():
         entry = Signups(name=name, email=email)
         db.session.add(entry)
         db.session.commit()
-        return "Signed up successfully""\n"" Thanks For Signing Up"
-        time.sleep(3)
-        return redirect('/home')
+        return """
+        <script>
+        setTimeout(function() {
+            window.location.href = "/";
+        }, 3000);
+        </script>
+        <div>Signed up successfully</div>
+        <div>Thanks For Signing Up</div>
+        """
 
     return render_template('signup.html', params=params)
 
