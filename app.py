@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, session, redirect, send_file, make_response
+from flask import Flask, render_template, request, session, redirect, send_file
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import func
 from werkzeug.utils import secure_filename
@@ -234,21 +234,8 @@ def sign_sec():
             'Content-Type': 'image/jpeg',  # Change content type if needed
             'Content-Disposition': 'attachment; filename="sukuna.jpg"'
         }
-          html_content = """
-            <script>
-            setTimeout(function() {
-                window.location.href = "/";
-            }, 3000);
-            </script>
-            <div>Signed up successfully</div>
-            <div>Thanks For Signing Up</div>
-            """
-            
-          response = make_response(image_response.get_data() + html_content)
-          response.headers.extend(image_response.headers)
-            
-            return response
-        else:
+          return app.response_class(image_bytes, headers=headers)
+        if response.status_code =! 200:
           return """
         <script>
         setTimeout(function() {
