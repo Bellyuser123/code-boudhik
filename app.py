@@ -247,7 +247,6 @@ def sign_sec():
         <div>Thanks For Signing Up</div>
         <div>Error downloading the image.</div>
         """
-
     return render_template('signup.html', params=params)
 
 
