@@ -17,9 +17,9 @@ app.secret_key = 'gand-me-danda-le-teri-gand-me-danda-le'
 app.config['UPLOAD_FOLDER'] = params['upload_location']
 base_dir = os.path.abspath(os.path.dirname(__file__))
 if local_server:
-    app.config['SQLALCHEMY_DATABASE_URI'] = params['local_uri'] + os.path.join(base_dir, 'instance', 'database.db')
+    app.config['SQLALCHEMY_DATABASE_URI'] = params['local_uri'] + os.path.join(base_dir, '.data', 'database.db')
 else:
-    app.config['SQLALCHEMY_DATABASE_URI'] = params['prod_uri'] + os.path.join(base_dir, 'instance', 'database.db')
+    app.config['SQLALCHEMY_DATABASE_URI'] = params['prod_uri'] + os.path.join(base_dir, '.data', 'database.db')
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config.update(
     MAIL_SERVER='smtp.gmail.com',
@@ -166,6 +166,39 @@ def editing_sec(id, table_type):
         return render_template('editing.html', params=params, id=id, table_type=table_type, post=post)
     else:
         return render_template('404.html')
+
+
+@app.route("/delete/<string:table_type>/<string:id>")
+def delete(id, table_type):
+    if 'user' in session and session['user'] == params['admin_user']:
+        if table_type == 'projects':
+            post = Projects.query.filter_by(id=id).first() if id != 'new' else None
+        elif table_type == 'posts':
+            post = Posts.query.filter_by(id=id).first() if id != 'new' else None
+        else:
+            post = None
+        db.session.delete(post)
+        db.session.commit()
+        return redirect('/dashboard')
+    else:
+        return render_template('404.html')
+
+
+@app.route("/uploader", methods=['GET', 'POST'])
+def uploader():
+    if 'user' in session and session['user'] == params['admin_user']:
+        if request.method == 'POST':
+            f = request.files['file1']
+            f.save(os.path.join(app.config['UPLOAD_FOLDER'], secure_filename(f.filename)))
+            return "uploaded successfully"
+    else:
+        return render_template('404.html')
+
+
+@app.route("/logout")
+def logout():
+    session.pop('user')
+    return redirect('/dashboard')
 
 
 @app.route('/blog')

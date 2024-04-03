@@ -96,12 +96,12 @@
                     <td align="center" class="py-2 px-2 border-b">{{section.date}}</td>
                     <td align="center" class="py-2 px-1 border-b">
                         <button class="inline-flex text-gray-700 bg-gray-200 border-0 py-2 px-6 focus:outline-none hover:bg-gray-300 rounded text-lg">
-                            <a href="{{ url_for('editing_sec', table_type=table_type, serial=section.serial) }}">Edit</a>
+                            <a href="{{ url_for('editing_sec', table_type=table_type, id=section.id) }}">Edit</a>
                         </button>
                     </td>
                     <td align="center" class="py-2 px-1 border-b">
                         <button class="inline-flex text-gray-700 bg-gray-200 border-0 py-2 px-6 focus:outline-none hover:bg-gray-300 rounded text-lg">
-                            <a href="{{ url_for('delete', table_type=table_type, serial=section.serial) }}">Delete</a>
+                            <a href="{{ url_for('delete', table_type=table_type, id=section.id) }}">Delete</a>
                         </button>
                     </td>
                 </tr>
