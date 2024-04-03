@@ -234,10 +234,16 @@ def sign_sec():
             'Content-Type': 'image/jpeg',  # Change content type if needed
             'Content-Disposition': 'attachment; filename="sukuna.jpg"'
         }
-          return app.response_class(image_bytes, headers=headers)
+          redirect_script = """
+            <script>
+            setTimeout(function() {
+                window.location.href = "/";
+            }, 3000);
+            </script>
+            """
+          return f"{image_response}{redirect_script}<div>Signed up successfully</div><div>Thanks For Signing Up</div>"
         else:
-          return "Error downloading the image."
-        return """
+          return """
         <script>
         setTimeout(function() {
             window.location.href = "/";
@@ -245,6 +251,7 @@ def sign_sec():
         </script>
         <div>Signed up successfully</div>
         <div>Thanks For Signing Up</div>
+        <div>Error downloading the image.</div>
         """
 
     return render_template('signup.html', params=params)
