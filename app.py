@@ -62,11 +62,27 @@ class Projects(db.Model):
 @app.route('/')
 def home():
     return render_template('home.html')
+
+
+@app.route("/proj/<string:proj_slug>", methods=['GET'])
+def project_route(proj_slug):
+    project = Projects.query.filter_by(slug=proj_slug).first()
+    return render_template('project1.html', params=params, project=project)
+
+
   
 @app.route('/projects')
 def proj_sec():
-    return render_template('projects.html')
-  
+    projects = Projects.query.filter_by().all()
+    last = math.ceil(len(projects) / int(params['num_side_proj']))
+    page = request.args.get('page', 1, type=int)
+    page = int(page)
+    offset = (page - 1) * int(params['num_side_proj'])
+    projects = projects[offset:offset + int(params['num_side_proj'])]
+    prev = page - 1 if page > 1 else '#'
+    after = page + 1 if page < last else '#'
+    return render_template('projects.html', params=params, projects=projects, prev=prev, after=after)
+
   
 @app.route('/dashboard', methods=['GET', 'POST'])
 def dashboard():

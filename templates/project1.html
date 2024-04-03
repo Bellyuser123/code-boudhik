@@ -8,7 +8,7 @@
 <body class="font-sans bg-white-900 text-white">
 
 <!-- Hero Section with Integrated Navigation Bar -->
-{% set fname = post.image %}
+{% set fname = project.image %}
 <section class="h-screen flex flex-col items-center justify-center bg-cover bg-center relative"
          style="background-image: url('{{ fname }}'); background-size: 80%; height: 55vh;">
     <!-- Overlay to enhance text visibility -->
@@ -44,15 +44,14 @@
 
     <!-- Text content in the center of the hero section -->
     <div class="text-center z-10 mt-12 md:mt-24">
-        <h2 class="text-4xl md:text-6xl font-bold leading-tight mb-4">{{post.title}}</h2>
-        <p class="text-lg md:text-xl">Posted on {{post.date}}</p>
+        <h2 class="text-4xl md:text-6xl font-bold leading-tight mb-4">{{project.title}}</h2>
     </div>
 
 </section>
 <section class="text-gray-800 body-font">
     <div class="container mx-auto flex px-5 py-24 items-center justify-center flex-col">
         <div class="text-center lg:w-2/3 w-full">
-            <p class="mb-8 leading-relaxed">{{post.content}}</p>
+            <p class="mb-8 leading-relaxed">{{project.content}}</p>
         </div>
     </div>
 </section>
