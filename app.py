@@ -40,7 +40,7 @@ class Contacts(db.Model):
     name = db.Column(db.String(80), nullable=False)
     email = db.Column(db.String(120), nullable=False)
     message = db.Column(db.Text, nullable=False)
-    date = db.Column(db.DateTime, nullable=False, default=datetime.date)
+    date = db.Column(db.DateTime, nullable=False)
 
 
 class Posts(db.Model):
@@ -285,7 +285,8 @@ def cont_sec():
         name = request.form.get('name')
         email = request.form.get('email')
         message = request.form.get('message')
-        entry = Contacts(name=name, email=email, message=message)
+        date = datetime.now()
+        entry = Contacts(name=name, email=email, message=message, date=date)
         db.session.add(entry)
         db.session.commit()
         subject = 'New Message From Your Website'
