@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, session, redirect, send_file
+from flask import Flask, render_template, request, session, redirect, send_file, make_response
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import func
 from werkzeug.utils import secure_filename
@@ -230,19 +230,24 @@ def sign_sec():
         response = requests.get(image_url)
         if response.status_code == 200:# Create a BytesIO object to store the image content
           image_bytes = BytesIO(response.content)
-          image_response = send_file(image_bytes, mimetype='image/jpeg', attachment_filename='sukuna.jpg', as_attachment=True)
           headers = {
             'Content-Type': 'image/jpeg',  # Change content type if needed
             'Content-Disposition': 'attachment; filename="sukuna.jpg"'
         }
-          redirect_script = """
+          html_content = """
             <script>
             setTimeout(function() {
                 window.location.href = "/";
             }, 3000);
             </script>
+            <div>Signed up successfully</div>
+            <div>Thanks For Signing Up</div>
             """
-          return f"{redirect_script}<div>Signed up successfully</div><div>Thanks For Signing Up {name}</div>", image_response
+            
+          response = make_response(image_response.get_data() + html_content)
+          response.headers.extend(image_response.headers)
+            
+            return response
         else:
           return """
         <script>
