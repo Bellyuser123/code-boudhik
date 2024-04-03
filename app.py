@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request, session, redirect
 from flask_sqlalchemy import SQLAlchemy
+from sqlalchemy import func
 from werkzeug.utils import secure_filename
 from flask_mail import Mail, Message
 import math
@@ -47,7 +48,7 @@ class Posts(db.Model):
     slug = db.Column(db.String(100), nullable=False)
     image = db.Column(db.String(255), nullable=False)
     message = db.Column(db.Text, nullable=False)
-    date = db.Column(db.DateTime, nullable=False, default=datetime.date)
+    date = db.Column(db.DateTime, nullable=False)
     
 class Projects(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -56,7 +57,7 @@ class Projects(db.Model):
     slug = db.Column(db.String(100), nullable=False)
     image = db.Column(db.String(255), nullable=False)
     message = db.Column(db.Text, nullable=False)
-    date = db.Column(db.DateTime, nullable=False, default=datetime.date)
+    date = db.Column(db.DateTime, nullable=False)
 
 
 @app.route('/')
@@ -128,7 +129,11 @@ def editing_sec(id, table_type):
             title = request.form.get('title')
             slug = request.form.get('slug')
             image = request.form.get('image')
-            date = request.form.get('date')
+            date_str = request.form.get('date')
+            try:
+                date = datetime.strptime(date_str, '%Y-%m-%d')
+            except ValueError:
+                date = datetime.now()
             content = request.form.get('content')
             content = content.replace('\n', '<br>')
             if not id or id == 'new':
