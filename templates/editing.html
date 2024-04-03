@@ -1,114 +1,212 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Editing Page</title>
     <script src="https://cdn.tailwindcss.com"></script>
-</head>
-<body class="relative"
-      style="background-image: url('https://cdn.glitch.global/2d9ffa8a-6165-4ffb-abec-3674c231adcf/admin_bg.jpg?v=1710244826655') ; background-size: 100%; background-position: center; background-repeat: no-repeat;">
-
-<div class="absolute inset-0 bg-black opacity-90"></div>
-<!-- Header && Navigation Section -->
-<section class="h-screen flex flex-col items-center justify-center bg-cover bg-center relative"
-         style="background-image: url('https://cdn.glitch.global/2d9ffa8a-6165-4ffb-abec-3674c231adcf/admin_panel.jpg?v=1710244827985'); background-size: 80%; height: 30vh;">
-    <div class="absolute inset-0 bg-black opacity-40"></div>
-    <header class="text-gray-300 body-font bg-transparent absolute top-0 w-full z-50">
-        <div class="container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center">
-            <nav class="flex lg:w-2/5 flex-wrap items-center text-base md:ml-auto">
-                <form method="post" action="{{ url_for('dashboard') }}">
-                    <input type="hidden" name="table_type" value="projects">
-                    <button type="submit" class="px-4 py-2 hover:text-gray-400">Projects</button>
-                </form>
-                <form method="post" action="{{ url_for('dashboard') }}">
-                    <input type="hidden" name="table_type" value="posts">
-                    <button type="submit" class="px-4 py-2 hover:text-gray-400">Posts</button>
-                </form>
-            </nav>
-            <a class="flex order-first lg:order-none lg:w-1/5 title-font font-medium items-center text-gray-300 lg:items-center lg:justify-center mb-4 md:mb-0">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round"
-                     stroke-linejoin="round" stroke-width="2" class="w-10 h-10 text-white p-2 bg-red-500 rounded-full"
-                     viewBox="0 0 24 24">
-                    <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path>
-                </svg>
-                <span class="ml-3 text-xl">BTHON</span>
-            </a>
-            <div class="lg:w-2/5 inline-flex lg:justify-end ml-5 lg:ml-0">
-                <button class="inline-flex items-center bg-transparent border-0 py-1 px-3 focus:outline-none hover:bg-gray-500 rounded text-base mt-4 md:mt-0">
-                    <a href="/logout">Logout</a>
-                    <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                         stroke-width="2" class="w-4 h-4 ml-1" viewBox="0 0 24 24">
-                        <path d="M5 12h14M12 5l7 7-7 7"></path>
-                    </svg>
-                </button>
-            </div>
-        </div>
-    </header>
-    <div class="text-center z-10 mt-12 md:mt-12">
-        <h4 class="text-4xl text-green-200 md:text-4xl font-bold leading-tight mb-4">Editing page</h4>
-        <p class="text-lg text-green-200 md:text-xl"></p>
-    </div>
-</section>
-
-<!-- table Section -->
-<section class="h-screen relative">
-    <div class="container mx-auto relative z-10">
-        <div class="pt-4">
-            <form action="/edit/{{ table_type }}/{{ id }}" method="post">
-                <div class="container px-5 py-19 mx-auto">
-                    <div class="flex flex-col w-full mb-12">
-                        <h1 class="sm:text-3xl text-2xl font-medium title-font mb-1 text-gray-200">ADD/Edit
-                            {{table_type}}</h1>
-                    </div>
-                    <div class="flex lg:w-2/3 w-full sm:flex-row flex-col mx-auto px-8 sm:space-x-4 sm:space-y-0 space-y-4 sm:px-0 items-end">
-                        <div class="flex flex-wrap -m-2">
-                            <div class="p-2 w-full">
-                                <label class="leading-7 text-sm text-gray-600">{{table_type}} Serial no.
-                                    {{id}}</label>
-                            </div>
-                            <div class="p-2 w-full md:w-1/2">
-                                <label for="title" class="leading-7 text-sm text-gray-600">Title:</label>
-                                <input type="text" id="title" name="title" value="{{post.title}}"
-                                       class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
-                            </div>
-                            <div class="p-2 w-full md:w-1/2">
-                                <label for="slug" class="leading-7 text-sm text-gray-600">Slug:</label>
-                                <input type="text" id="slug" name="slug" value="{{post.slug}}"
-                                       class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
-                            </div>
-                            <div class="p-2 w-full md:w-1/2">
-                                <label for="image" class="leading-7 text-sm text-gray-600">Image:</label>
-                                <input type="text" id="image" name="image" value="{{post.image}}"
-                                       class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
-                            </div>
-                            <div class="p-2 w-full md:w-1/2">
-                                <label for="date" class="leading-7 text-sm text-gray-600">Date:</label>
-                                <input type="text" id="date" name="date" value="{{post.date}}"
-                                       class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
-                            </div>
-                            <div class="p-2 w-full">
-                                <label for="content" class="leading-7 text-sm text-gray-600">Content:</label>
-                                <textarea id="content" name="content"
-                                          class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out h-48">{{ post.content.split('\n')|join('<br>')|safe }}</textarea>
-                            </div>
-                            <div class="p-2 w-full md:w-1/2">
-                                <button class="text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg">
-                                    Save Changes
-                                </button>
-                            </div>
-                            <div class="p-2 w-full md:w-1/2">
-                                <button class="text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg">
-                                    <a href="/dashboard">Dashboard Home</a></button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+  </head>
+  <body
+    class="relative"
+    style="
+      background-image: url('https://cdn.glitch.global/2d9ffa8a-6165-4ffb-abec-3674c231adcf/admin_bg.jpg?v=1710244826655');
+      background-size: 100%;
+      background-position: center;
+      background-repeat: no-repeat;
+    "
+  >
+    <div class="absolute inset-0 bg-black opacity-90"></div>
+    <!-- Header && Navigation Section -->
+    <section
+      class="h-screen flex flex-col items-center justify-center bg-cover bg-center relative"
+      style="
+        background-image: url('https://cdn.glitch.global/2d9ffa8a-6165-4ffb-abec-3674c231adcf/admin_panel.jpg?v=1710244827985');
+        background-size: 80%;
+        height: 30vh;
+      "
+    >
+      <div class="absolute inset-0 bg-black opacity-40"></div>
+      <header
+        class="text-gray-300 body-font bg-transparent absolute top-0 w-full z-50"
+      >
+        <div
+          class="container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center"
+        >
+          <nav
+            class="flex lg:w-2/5 flex-wrap items-center text-base md:ml-auto"
+          >
+            <form method="post" action="{{ url_for('dashboard') }}">
+              <input type="hidden" name="table_type" value="projects" />
+              <button type="submit" class="px-4 py-2 hover:text-gray-400">
+                Projects
+              </button>
             </form>
+            <form method="post" action="{{ url_for('dashboard') }}">
+              <input type="hidden" name="table_type" value="posts" />
+              <button type="submit" class="px-4 py-2 hover:text-gray-400">
+                Posts
+              </button>
+            </form>
+          </nav>
+          <a
+            class="flex order-first lg:order-none lg:w-1/5 title-font font-medium items-center text-gray-300 lg:items-center lg:justify-center mb-4 md:mb-0"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              stroke="currentColor"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              class="w-10 h-10 text-white p-2 bg-red-500 rounded-full"
+              viewBox="0 0 24 24"
+            >
+              <path
+                d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"
+              ></path>
+            </svg>
+            <span class="ml-3 text-xl">BTHON</span>
+          </a>
+          <div class="lg:w-2/5 inline-flex lg:justify-end ml-5 lg:ml-0">
+            <button
+              class="inline-flex items-center bg-transparent border-0 py-1 px-3 focus:outline-none hover:bg-gray-500 rounded text-base mt-4 md:mt-0"
+            >
+              <a href="/logout">Logout</a>
+              <svg
+                fill="none"
+                stroke="currentColor"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                class="w-4 h-4 ml-1"
+                viewBox="0 0 24 24"
+              >
+                <path d="M5 12h14M12 5l7 7-7 7"></path>
+              </svg>
+            </button>
+          </div>
         </div>
-    </div>
-</section>
+      </header>
+      <div class="text-center z-10 mt-12 md:mt-12">
+        <h4
+          class="text-4xl text-green-200 md:text-4xl font-bold leading-tight mb-4"
+        >
+          Editing page
+        </h4>
+        <p class="text-lg text-green-200 md:text-xl"></p>
+      </div>
+    </section>
 
-
-</body>
+    <!-- table Section -->
+    <section class="h-screen relative">
+      <div class="container mx-auto relative z-10">
+        <div class="pt-4">
+          <form action="/edit/{{ table_type }}/{{ id }}" method="post">
+            <div class="container px-5 py-19 mx-auto">
+              <div class="flex flex-col w-full mb-12">
+                <h1
+                  class="sm:text-3xl text-2xl font-medium title-font mb-1 text-gray-200"
+                >
+                  ADD/Edit {{table_type}}
+                </h1>
+              </div>
+              <div
+                class="flex lg:w-2/3 w-full sm:flex-row flex-col mx-auto px-8 sm:space-x-4 sm:space-y-0 space-y-4 sm:px-0 items-end"
+              >
+                <div class="flex flex-wrap -m-2">
+                  <div class="p-2 w-full">
+                    <label class="leading-7 text-sm text-gray-600"
+                      >{{table_type}} Serial no. {{id}}</label
+                    >
+                  </div>
+                  <div class="p-2 w-full md:w-1/2">
+                    <label for="title" class="leading-7 text-sm text-gray-600"
+                      >Title:</label
+                    >
+                    <input
+                      type="text"
+                      id="title"
+                      name="title"
+                      value="{{post.title}}"
+                      class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
+                    />
+                  </div>
+                  <div class="p-2 w-full md:w-1/2">
+                    <label for="slug" class="leading-7 text-sm text-gray-600"
+                      >Slug:</label
+                    >
+                    <input
+                      type="text"
+                      id="slug"
+                      name="slug"
+                      value="{{post.slug}}"
+                      class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
+                    />
+                  </div>
+                  <div class="p-2 w-full md:w-1/2">
+                    <label for="image" class="leading-7 text-sm text-gray-600"
+                      >Image:</label
+                    >
+                    <input
+                      type="text"
+                      id="image"
+                      name="image"
+                      value="{{post.image}}"
+                      class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
+                    />
+                  </div>
+                  <div class="p-2 w-full md:w-1/2">
+                    <label for="date" class="leading-7 text-sm text-gray-600"
+                      >Date:</label
+                    >
+                    <input
+                      type="text"
+                      id="date"
+                      name="date"
+                      value="{{post.date}}"
+                      class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
+                    />
+                  </div>
+                  <div class="p-2 w-full">
+                    <label for="content" class="leading-7 text-sm text-gray-600"
+                      >Content:</label
+                    >
+                    {% if post is not none %}
+                    <textarea
+                      id="content"
+                      name="content"
+                      class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out h-48"
+                    >
+{{ post.content.split('\n')|join('<br>')|safe }}</textarea
+                    >
+                    {% else %}
+                    <textarea
+                      id="content"
+                      name="content"
+                      class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out h-48"
+                    ></textarea>
+                    {% endif %}
+                  </div>
+                  <div class="p-2 w-full md:w-1/2">
+                    <button
+                      class="text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg"
+                    >
+                      Save Changes
+                    </button>
+                  </div>
+                  <div class="p-2 w-full md:w-1/2">
+                    <button
+                      class="text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg"
+                    >
+                      <a href="/dashboard">Dashboard Home</a>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </section>
+  </body>
 </html>

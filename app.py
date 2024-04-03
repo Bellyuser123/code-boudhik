@@ -3,7 +3,7 @@ from flask_sqlalchemy import SQLAlchemy
 from werkzeug.utils import secure_filename
 from flask_mail import Mail, Message
 import math
-import datetime
+from datetime import datetime
 import os
 import json
 
@@ -38,7 +38,7 @@ class Contacts(db.Model):
     name = db.Column(db.String(80), nullable=False)
     email = db.Column(db.String(120), nullable=False)
     message = db.Column(db.Text, nullable=False)
-    date = db.Column(db.DateTime, nullable=False, default=datetime.datetime.utcnow)
+    date = db.Column(db.DateTime, nullable=False, default=datetime.date)
     
 class Posts(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -47,7 +47,7 @@ class Posts(db.Model):
     slug = db.Column(db.String(100), nullable=False)
     image = db.Column(db.String(255), nullable=False)
     message = db.Column(db.Text, nullable=False)
-    date = db.Column(db.DateTime, nullable=False, default=datetime.datetime.utcnow)
+    date = db.Column(db.DateTime, nullable=False, default=datetime.date)
     
 class Projects(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -56,7 +56,7 @@ class Projects(db.Model):
     slug = db.Column(db.String(100), nullable=False)
     image = db.Column(db.String(255), nullable=False)
     message = db.Column(db.Text, nullable=False)
-    date = db.Column(db.DateTime, nullable=False, default=datetime.datetime.utcnow)
+    date = db.Column(db.DateTime, nullable=False, default=datetime.date)
 
 
 @app.route('/')
