@@ -221,7 +221,7 @@ def sign_sec():
         entry = Signups(name=name, email=email)
         db.session.add(entry)
         db.session.commit()
-        return "Signed up successfully \n Thanks For Signing Up"
+        return "Signed up successfully""\n"" Thanks For Signing Up"
         time.sleep(3)
         return redirect('/home')
 
