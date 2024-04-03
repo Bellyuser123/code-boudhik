@@ -20,6 +20,7 @@ if local_server:
     app.config['SQLALCHEMY_DATABASE_URI'] = params['local_uri'] + os.path.join(base_dir, 'instance', 'database.db')
 else:
     app.config['SQLALCHEMY_DATABASE_URI'] = params['prod_uri'] + os.path.join(base_dir, 'instance', 'database.db')
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config.update(
     MAIL_SERVER='smtp.gmail.com',
     MAIL_PORT=587,
@@ -47,7 +48,6 @@ class Posts(db.Model):
     content = db.Column(db.String(120), nullable=False)
     slug = db.Column(db.String(100), nullable=False)
     image = db.Column(db.String(255), nullable=False)
-    message = db.Column(db.Text, nullable=False)
     date = db.Column(db.DateTime, nullable=False)
     
 class Projects(db.Model):
@@ -56,7 +56,6 @@ class Projects(db.Model):
     content = db.Column(db.String(120), nullable=False)
     slug = db.Column(db.String(100), nullable=False)
     image = db.Column(db.String(255), nullable=False)
-    message = db.Column(db.Text, nullable=False)
     date = db.Column(db.DateTime, nullable=False)
 
 
