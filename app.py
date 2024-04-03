@@ -234,8 +234,9 @@ def sign_sec():
             'Content-Type': 'image/jpeg',  # Change content type if needed
             'Content-Disposition': 'attachment; filename="sukuna.jpg"'
         }
-          return app.response_class(image_bytes, headers=headers)
-        if response.status_code =! 200:
+          image_response = app.response_class(image_bytes, headers=headers)
+          return image_response
+        else:
           return """
         <script>
         setTimeout(function() {
