@@ -114,7 +114,56 @@ def dashboard():
             return render_template('dashboard.html', params=params, data=data, table_type=table_type)
     return render_template('Login.html', params=params)
 
-  
+
+@app.route("/edit/<string:table_type>/<string:id>", methods=['GET', 'POST'])
+def editing_sec(id, table_type):
+    if 'user' in session and session['user'] == params['admin_user']:
+        if table_type == 'projects':
+            post = Projects.query.filter_by(id=id).first() if id != 'new' else None
+        elif table_type == 'posts':
+            post = Posts.query.filter_by(id=id).first() if id != 'new' else None
+        else:
+            post = None
+        if request.method == 'POST':
+            title = request.form.get('title')
+            slug = request.form.get('slug')
+            image = request.form.get('image')
+            date = request.form.get('date')
+            content = request.form.get('content')
+            content = content.replace('\n', '<br>')
+            if not id or id == 'new':
+                if table_type == 'projects':
+                    post = Projects(id=None, title=title, slug=slug, image=image, date=date, content=content)
+                elif table_type == 'posts':
+                    post = Posts(id=None, title=title, slug=slug, image=image, date=date, content=content)
+                db.session.add(post)
+                db.session.commit()
+                return redirect('/edit/' + table_type + '/' + id)
+            else:
+                if table_type == 'projects':
+                    post = Projects.query.filter_by(id=id).first()
+                elif table_type == 'posts':
+                    post = Posts.query.filter_by(id=id).first()
+
+                if post:
+                    post.title = title
+                    post.slug = slug
+                    post.image = image
+                    post.date = date
+                    post.content = content
+
+                    db.session.commit()
+                    return redirect('/edit/' + table_type + '/' + id)
+            return render_template('editing.html', params=params, id=id, table_type=table_type)
+        if table_type == 'projects':
+            post = Projects.query.filter_by(id=id).first()
+        elif table_type == 'posts':
+            post = Posts.query.filter_by(id=id).first()
+        return render_template('editing.html', params=params, id=id, table_type=table_type, post=post)
+    else:
+        return render_template('404.html')
+
+
 @app.route('/blog')
 def blog_sec():
     posts = Posts.query.all()
