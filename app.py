@@ -3,6 +3,8 @@ from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import func
 from werkzeug.utils import secure_filename
 from flask_mail import Mail, Message
+import requests
+from io import BytesIO
 import math
 import time
 from datetime import datetime
@@ -223,6 +225,18 @@ def sign_sec():
         entry = Signups(name=name, email=email)
         db.session.add(entry)
         db.session.commit()
+        image_url = 'https://cdn.glitch.global/23ec6fd6-4c08-4fcf-8e26-4de29dd1642e/sukuna.jpg?v=1712131620785'
+        # Download the image from the CDN
+        response = requests.get(image_url)
+        if response.status_code == 200:# Create a BytesIO object to store the image content
+          image_bytes = BytesIO(response.content)
+          headers = {
+            'Content-Type': 'image/jpeg',  # Change content type if needed
+            'Content-Disposition': 'attachment; filename="sukuna.jpg"'
+        }
+          return app.response_class(image_bytes, headers=headers)
+        else:
+          return "Error downloading the image."
         return """
         <script>
         setTimeout(function() {
