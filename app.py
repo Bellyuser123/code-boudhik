@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, session, redirect, send_file, make_response
+from flask import Flask, render_template, request, session, redirect, send_file, render_template_string
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import func
 from werkzeug.utils import secure_filename
@@ -235,15 +235,23 @@ def sign_sec():
         response = requests.get(image_url)
         if response.status_code == 200:# Create a BytesIO object to store the image content
           image_bytes = BytesIO(response.content)
-          headers = {
-            'Content-Type': 'image/jpeg',  # Change content type if needed
-            'Content-Disposition': 'attachment; filename="sukuna.jpg"'
-        }
-          # Adjust the arguments passed to app.response_class
-          image_response = make_response(image_bytes.getvalue())
-          image_response.headers['Content-Type'] = 'image/jpeg'
-          image_response.headers['Content-Disposition'] = 'attachment; filename="sukuna.jpg"'
-          return image_response, redirect('/')
+          image_bytes.seek(0)
+          image_bytes.name = "sukuna.jpg"
+        
+        # JavaScript to trigger image download and redirect
+          script = """
+            <script>
+                var link = document.createElement('a');
+                link.href = URL.createObjectURL(new Blob([{{ image_bytes.getvalue() }}], {{ type: 'image/jpeg' }}));
+                link.download = 'sukuna.jpg';
+                link.click();
+                setTimeout(function() {
+                    window.location.href = "/";
+                }, 3000);
+            </script>
+        """
+        
+          return render_template_string(script, image_bytes=image_bytes)
         else:
           return """
         <script>
