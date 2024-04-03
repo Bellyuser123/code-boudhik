@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, session, redirect, send_file
+from flask import Flask, render_template, request, session, redirect, send_file, make_response
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import func
 from werkzeug.utils import secure_filename
@@ -204,9 +204,14 @@ def uploader():
         if request.method == 'POST':
             f = request.files['file1']
             f.save(os.path.join(app.config['UPLOAD_FOLDER'], secure_filename(f.filename)))
-            return "uploaded successfully"
-            time.sleep(3)
-            return redirect('/dashboard')
+            return """
+        <script>
+        setTimeout(function() {
+            window.location.href = "/dashboard";
+        }, 3000);
+        </script>
+        <div>Uploaded successfully</div>
+        """
     else:
         return render_template('404.html')
 
@@ -235,7 +240,9 @@ def sign_sec():
             'Content-Disposition': 'attachment; filename="sukuna.jpg"'
         }
           # Adjust the arguments passed to app.response_class
-          image_response = app.response_class(response=image_bytes.getvalue(), status=200, headers=headers, content_type='image/jpeg')
+          image_response = make_response(image_bytes.getvalue())
+          image_response.headers['Content-Type'] = 'image/jpeg'
+          image_response.headers['Content-Disposition'] = 'attachment; filename="sukuna.jpg"'
           return image_response, redirect('/')
         else:
           return """
