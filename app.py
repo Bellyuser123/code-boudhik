@@ -4,6 +4,7 @@ from sqlalchemy import func
 from werkzeug.utils import secure_filename
 from flask_mail import Mail, Message
 import math
+import time
 from datetime import datetime
 import os
 import json
@@ -200,6 +201,8 @@ def uploader():
             f = request.files['file1']
             f.save(os.path.join(app.config['UPLOAD_FOLDER'], secure_filename(f.filename)))
             return "uploaded successfully"
+            time.sleep(3)
+            return redirect('/dashboard')
     else:
         return render_template('404.html')
 
@@ -218,7 +221,9 @@ def sign_sec():
         entry = Signups(name=name, email=email)
         db.session.add(entry)
         db.session.commit()
-        return "Signed up successfully"
+        return "Signed up successfully \n Thanks For Signing Up"
+        time.sleep(3)
+        return redirect('/home')
 
     return render_template('signup.html', params=params)
 
