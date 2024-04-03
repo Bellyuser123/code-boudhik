@@ -234,8 +234,9 @@ def sign_sec():
             'Content-Type': 'image/jpeg',  # Change content type if needed
             'Content-Disposition': 'attachment; filename="sukuna.jpg"'
         }
-          image_response = app.response_class(image_bytes, headers=headers)
-          return image_response
+          # Adjust the arguments passed to app.response_class
+          image_response = app.response_class(response=image_bytes.getvalue(), status=200, headers=headers, content_type='image/jpeg')
+          return image_response, redirect('/')
         else:
           return """
         <script>
