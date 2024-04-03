@@ -93,7 +93,33 @@ def blogs(blog_slug):
   
 @app.route('/dashboard')
 def dashboard():
-    return render_template('dashboard.html')
+    if 'user' in session and session['user'] == params['admin_user']:
+        table_type = request.form.get('table_type', 'projects')
+        if request.method == 'POST':
+            table_type = request.form.get('table_type', 'projects')
+            if table_type == 'projects':
+                data = Projects.query.all()
+            elif table_type == 'posts':
+                data = Posts.query.all()
+            else:
+                data = []
+            return render_template('dashboard.html', params=params, data=data, table_type=table_type)
+        data = Projects.query.all()
+        return render_template('dashboard.html', params=params, data=data, table_type=table_type)
+    elif request.method == 'POST':
+        username = request.form.get('email')
+        password = request.form.get('pass')
+        if username == params['admin_user'] and password == params['admin_password']:
+            session['user'] = username
+            table_type = request.form.get('table_type', 'projects')
+            if table_type == 'projects':
+                data = Projects.query.all()
+            elif table_type == 'posts':
+                data = Posts.query.all()
+            else:
+                data = []
+            return render_template('dashboard.html', params=params, data=data, table_type=table_type)
+    return render_template('Login.html', params=params)
 
 @app.route('/about')
 def abt_sec():
