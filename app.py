@@ -60,6 +60,11 @@ class Projects(db.Model):
 
 
 @app.route('/')
+def welcome():
+    return render_template('front.html')
+
+
+@app.route('/home')
 def home():
     return render_template('home.html')
 
@@ -70,7 +75,6 @@ def project_route(proj_slug):
     return render_template('project1.html', params=params, project=project)
 
 
-  
 @app.route('/projects')
 def proj_sec():
     projects = Projects.query.filter_by().all()
@@ -83,7 +87,7 @@ def proj_sec():
     after = page + 1 if page < last else '#'
     return render_template('projects.html', params=params, projects=projects, prev=prev, after=after)
 
-  
+
 @app.route('/dashboard', methods=['GET', 'POST'])
 def dashboard():
     if 'user' in session and session['user'] == params['admin_user']:
@@ -213,13 +217,13 @@ def blog_sec():
     after = page + 1 if page < last else '#'
     return render_template('blog.html', params=params, posts=posts, prev=prev, after=after)
 
-  
+
 @app.route("/blog/<string:blog_slug>")
 def blogs(blog_slug):
     post = Posts.query.filter_by(slug=blog_slug).first()
     return render_template('blog1.html', params=params, post=post)  
 
-  
+
 @app.route('/contact', methods=['GET', 'POST'])
 def cont_sec():
   if request.method == 'POST':
@@ -247,8 +251,8 @@ def cont_sec():
 @app.route('/about')
 def abt_sec():
     return render_template('about.html')
-  
-  
+
+
 if __name__ == '__main__':
     with app.app_context():
       db.create_all()
