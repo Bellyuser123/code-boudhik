@@ -1,10 +1,9 @@
-from flask import Flask, render_template, request, session, redirect, send_file, render_template_string
+from flask import Flask, render_template, request, session, redirect, send_file
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import func
 from werkzeug.utils import secure_filename
 from flask_mail import Mail, Message
 import requests
-import base64
 from io import BytesIO
 import math
 import time
@@ -205,14 +204,9 @@ def uploader():
         if request.method == 'POST':
             f = request.files['file1']
             f.save(os.path.join(app.config['UPLOAD_FOLDER'], secure_filename(f.filename)))
-            return """
-        <script>
-        setTimeout(function() {
-            window.location.href = "/dashboard";
-        }, 3000);
-        </script>
-        <div>Uploaded successfully</div>
-        """
+            return "uploaded successfully"
+            time.sleep(3)
+            return redirect('/dashboard')
     else:
         return render_template('404.html')
 
@@ -231,41 +225,7 @@ def sign_sec():
         entry = Signups(name=name, email=email)
         db.session.add(entry)
         db.session.commit()
-        image_url = 'https://cdn.glitch.global/23ec6fd6-4c08-4fcf-8e26-4de29dd1642e/sukuna.jpg?v=1712131620785'
-        # Download the image from the CDN
-        response = requests.get(image_url)
-        if response.status_code == 200:# Create a BytesIO object to store the image content
-          image_bytes = BytesIO(response.content)
-          image_bytes.seek(0)
-          image_bytes.name = "sukuna.jpg"
-          image_base64 = base64.b64encode(image_bytes.getvalue()).decode('utf-8')
-        # JavaScript to trigger image download and redirect
-          script = """
-            <script>
-                var link = document.createElement('a');
-                var blob = new Blob([{{ image_bytes.getvalue()|tojson }}], {type: 'image/jpeg'});
-                link.href = URL.createObjectURL(blob);
-                link.download = 'sukuna.jpg';
-                link.click();
-                setTimeout(function() {
-                    window.location.href = "/";
-                }, 3000);
-            </script>
-            <div>Signed up successfully</div>
-            <div>Thanks For Signing Up</div>
-            """
-          return render_template_string(script, image_bytes=image_bytes)
-        else:
-          return """
-        <script>
-        setTimeout(function() {
-            window.location.href = "/";
-        }, 3000);
-        </script>
-        <div>Signed up successfully</div>
-        <div>Thanks For Signing Up</div>
-        <div>Error downloading the image.</div>
-        """
+        return redirect('/signed-')
     return render_template('signup.html', params=params)
 
 
