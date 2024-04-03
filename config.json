@@ -10,6 +10,6 @@
     "num_index": 3,
     "admin_user": "BOT_boudhik_super",
     "admin_password": "I Love Boudhik",
-    "upload_location": "C:\\Users\\MSI\\PycharmProjects\\web_test\\static"
+    "upload_location": "static/uploads"
   }
 }

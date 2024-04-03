@@ -17,9 +17,9 @@ app.secret_key = 'gand-me-danda-le-teri-gand-me-danda-le'
 app.config['UPLOAD_FOLDER'] = params['upload_location']
 base_dir = os.path.abspath(os.path.dirname(__file__))
 if local_server:
-    app.config['SQLALCHEMY_DATABASE_URI'] = params['local_uri'] + os.path.join(base_dir, '.data', 'database.db')
+    app.config['SQLALCHEMY_DATABASE_URI'] = params['local_uri'] + os.path.join(base_dir, 'data', 'database.db')
 else:
-    app.config['SQLALCHEMY_DATABASE_URI'] = params['prod_uri'] + os.path.join(base_dir, '.data', 'database.db')
+    app.config['SQLALCHEMY_DATABASE_URI'] = params['prod_uri'] + os.path.join(base_dir, 'data', 'database.db')
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config.update(
     MAIL_SERVER='smtp.gmail.com',
@@ -57,6 +57,11 @@ class Projects(db.Model):
     slug = db.Column(db.String(100), nullable=False)
     image = db.Column(db.String(255), nullable=False)
     date = db.Column(db.DateTime, nullable=False)
+
+class Signups(db.Model):
+    id = db.Column(db.Integer, primary_key=True, nullable=False)
+    name = db.Column(db.String, nullable=False)
+    email = db.Column(db.String, unique=False)
 
 
 @app.route('/')
@@ -203,6 +208,19 @@ def uploader():
 def logout():
     session.pop('user')
     return redirect('/dashboard')
+
+
+@app.route("/signup", methods=['GET', 'POST'])
+def sign_sec():
+    if request.method == 'POST':
+        name = request.form.get('name')
+        email = request.form.get('email')
+        entry = Signups(name=name, email=email)
+        db.session.add(entry)
+        db.session.commit()
+        return "Signed up successfully"
+
+    return render_template('signup.html', params=params)
 
 
 @app.route('/blog')
