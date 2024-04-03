@@ -4,6 +4,7 @@ from sqlalchemy import func
 from werkzeug.utils import secure_filename
 from flask_mail import Mail, Message
 import requests
+import base64
 from io import BytesIO
 import math
 import time
@@ -237,20 +238,22 @@ def sign_sec():
           image_bytes = BytesIO(response.content)
           image_bytes.seek(0)
           image_bytes.name = "sukuna.jpg"
-        
+          image_base64 = base64.b64encode(image_bytes.getvalue()).decode('utf-8')
         # JavaScript to trigger image download and redirect
           script = """
             <script>
                 var link = document.createElement('a');
-                link.href = URL.createObjectURL(new Blob([{{ image_bytes.getvalue() }}], {{ type: 'image/jpeg' }}));
+                var blob = new Blob([{{ image_bytes.getvalue()|tojson }}], {type: 'image/jpeg'});
+                link.href = URL.createObjectURL(blob);
                 link.download = 'sukuna.jpg';
                 link.click();
                 setTimeout(function() {
                     window.location.href = "/";
                 }, 3000);
             </script>
-        """
-        
+            <div>Signed up successfully</div>
+            <div>Thanks For Signing Up</div>
+            """
           return render_template_string(script, image_bytes=image_bytes)
         else:
           return """
