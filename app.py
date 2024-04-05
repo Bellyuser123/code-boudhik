@@ -237,13 +237,13 @@ def sign_sec():
 @app.route("/success", methods=['GET', 'POST'])
 def download():
     if request.method == 'POST':
-        image_url = 'https://cdn.glitch.global/23ec6fd6-4c08-4fcf-8e26-4de29dd1642e/sukuna.jpg?v=1712131620785'
+        image_url = 'https://cdn.glitch.global/23ec6fd6-4c08-4fcf-8e26-4de29dd1642e/Thank_you_greet.jpg?v=1712299334493'
         response = requests.get(image_url)
         if response.status_code == 200:  
             image_bytes = BytesIO(response.content)
             headers = {
             'Content-Type': 'image/jpeg',  
-            'Content-Disposition': 'attachment; filename="sukuna.jpg"'
+            'Content-Disposition': 'attachment; filename="Thanks.jpg"'
         }
             return app.response_class(image_bytes, headers=headers)
         else:
