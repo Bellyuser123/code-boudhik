@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, session, redirect
+from flask import Flask, render_template, request, session, redirect, flash
 from flask_sqlalchemy import SQLAlchemy
 from werkzeug.utils import secure_filename
 from flask_mail import Mail, Message
@@ -300,6 +300,7 @@ def cont_sec():
                           recipients=[params['gmail_user']],
                           body=str(msg)
                           )
+        flash('Thank you for your feedback!')
         print("Message submitted successfully!")
     return render_template('contact.html', params=params)
 

@@ -55,4 +55,14 @@
     </form>
 </section>
 
+{% with messages = get_flashed_messages() %}
+  {% if messages %}
+    <div class="bg-gray-200 p-4 mb-4">
+      {% for message in messages %}
+        <p>{{ message }}</p>
+      {% endfor %}
+    </div>
+  {% endif %}
+{% endwith %}
+
 {% endblock %}
