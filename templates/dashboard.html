@@ -18,9 +18,14 @@
                 <form method="post" action="{{ url_for('dashboard') }}">
                     <input type="hidden" name="table_type" value="projects">
                     <button type="submit" class="px-4 py-2 hover:text-gray-400">Projects</button>
-                </form>
-                <form method="post" action="{{ url_for('dashboard') }}">
+                    
                     <input type="hidden" name="table_type" value="posts">
+                    <button type="submit" class="px-4 py-2 hover:text-gray-400">Posts</button>
+                    
+                    <input type="hidden" name="table_type" value="contacts">
+                    <button type="submit" class="px-4 py-2 hover:text-gray-400">Projects</button>
+                    
+                    <input type="hidden" name="table_type" value="siups">
                     <button type="submit" class="px-4 py-2 hover:text-gray-400">Posts</button>
                 </form>
                 <a class="px-4 py-2 hover:text-gray-400" href="/home">Back to web</a>
