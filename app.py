@@ -108,6 +108,10 @@ def dashboard():
                 data = Projects.query.all()
             elif table_type == 'posts':
                 data = Posts.query.all()
+            elif table_type == 'contacts':
+                data = Contacts.query.all()
+            elif table_type == 'signups':
+                data = Signups.query.all()
             else:
                 data = []
             return render_template('dashboard.html', params=params, data=data, table_type=table_type)
@@ -123,6 +127,10 @@ def dashboard():
                 data = Projects.query.all()
             elif table_type == 'posts':
                 data = Posts.query.all()
+            elif table_type == 'contacts':
+                data = Contacts.query.all()
+            elif table_type == 'signups':
+                data = Signups.query.all()
             else:
                 data = []
             return render_template('dashboard.html', params=params, data=data, table_type=table_type)
@@ -189,6 +197,7 @@ def delete(id, table_type):
             post = Projects.query.filter_by(id=id).first() if id != 'new' else None
         elif table_type == 'posts':
             post = Posts.query.filter_by(id=id).first() if id != 'new' else None
+            
         else:
             post = None
         db.session.delete(post)

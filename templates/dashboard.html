@@ -23,10 +23,10 @@
                     <button type="submit" class="px-4 py-2 hover:text-gray-400">Posts</button>
                     
                     <input type="hidden" name="table_type" value="contacts">
-                    <button type="submit" class="px-4 py-2 hover:text-gray-400">Projects</button>
+                    <button type="submit" class="px-4 py-2 hover:text-gray-400">Feedbacks</button>
                     
-                    <input type="hidden" name="table_type" value="siups">
-                    <button type="submit" class="px-4 py-2 hover:text-gray-400">Posts</button>
+                    <input type="hidden" name="table_type" value="signups">
+                    <button type="submit" class="px-4 py-2 hover:text-gray-400">Signed Users</button>
                 </form>
                 <a class="px-4 py-2 hover:text-gray-400" href="/home">Back to web</a>
             </nav>
@@ -77,6 +77,53 @@
                 </div>
             </div>
             <h1 class="text-lg text-gray-400 md:text-2xl pb-4">Edit/Delete {{table_type}} :</h1>
+            {% if table_type == 'contacts' %}
+            <table class="min-w-full bg-white border border-gray-300">
+                <thead>
+                    <tr>
+                        <th class="py-2 px-2 border-b bg-gray-100">Serial</th>
+                        <th class="py-2 px-2 border-b bg-gray-100">Name</th>
+                        <th class="py-2 px-4 border-b bg-gray-100">Email</th>
+                        <th class="py-2 px-4 border-b bg-gray-100">Message</th>
+                        <th class="py-2 px-4 border-b bg-gray-100">Delete</th>
+                    </tr>
+                </thead>
+                {% for contact in data %}
+                <tbody>
+                    <tr>
+                        <td align="center" class="py-2 px-1 border-b">{{ contact.id }}</td>
+                        <td align="center" class="py-2 px-1 border-b">{{ contact.name }}</td>
+                        <td class="py-2 px-6 border-b">{{ contact.email }}</td>
+                        <td class="py-2 px-4 border-b">{{ contact.message }}</td>
+                        <td align="center" class="py-2 px-1 border-b">
+                            <button class="inline-flex text-gray-700 bg-gray-200 border-0 py-2 px-6 focus:outline-none hover:bg-gray-300 rounded text-lg">
+                                <a href="{{ url_for('delete', table_type=table_type, id=section.id) }}">Delete</a>
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+                {% endfor %}
+            </table>
+            {% elif table_type == 'signups' %}
+            <table class="min-w-full bg-white border border-gray-300">
+                <thead>
+                    <tr>
+                        <th class="py-2 px-2 border-b bg-gray-100">Serial</th>
+                        <th class="py-2 px-4 border-b bg-gray-100">Name</th>
+                        <th class="py-2 px-4 border-b bg-gray-100">Email</th>
+                    </tr>
+                </thead>
+                {% for user in data %}
+                <tbody>
+                    <tr>
+                        <td align="center" class="py-2 px-1 border-b">{{ user.id }}</td>
+                        <td class="py-2 px-6 border-b">{{ user.name }}</td>
+                        <td class="py-2 px-4 border-b">{{ user.email }}</td>
+                    </tr>
+                </tbody>
+                {% endfor %}
+            </table>
+            {% else %}
             <table class="min-w-full bg-white border border-gray-300">
                 <thead>
                 <tr>
@@ -109,6 +156,7 @@
                 </tbody>
                 {% endfor %}
             </table>
+            {% endif %}
         </div>
     </div>
 </section>
