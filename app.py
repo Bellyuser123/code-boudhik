@@ -106,12 +106,16 @@ def dashboard():
             table_type = request.form.get('table_type', 'projects')
             if table_type == 'projects':
                 data = Projects.query.all()
+                print("projects")
             elif table_type == 'posts':
                 data = Posts.query.all()
+                print("posts")
             elif table_type == 'contacts':
                 data = Contacts.query.all()
+                print("contacts")
             elif table_type == 'signups':
                 data = Signups.query.all()
+                print("signups")
             else:
                 data = []
             return render_template('dashboard.html', params=params, data=data, table_type=table_type)
@@ -125,12 +129,16 @@ def dashboard():
             table_type = request.form.get('table_type', 'projects')
             if table_type == 'projects':
                 data = Projects.query.all()
+                print("projects")
             elif table_type == 'posts':
                 data = Posts.query.all()
+                print("posts")
             elif table_type == 'contacts':
                 data = Contacts.query.all()
+                print("contacts")
             elif table_type == 'signups':
                 data = Signups.query.all()
+                print("signups")
             else:
                 data = []
             return render_template('dashboard.html', params=params, data=data, table_type=table_type)
