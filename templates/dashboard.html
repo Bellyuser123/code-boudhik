@@ -20,7 +20,7 @@
                     <button type="submit" class="px-4 py-2 hover:text-gray-400">Projects</button>
                     
                     <input type="hidden" name="table_type" value="posts">
-                    <button type="submit" class="px-4 py-2 hover:text-gray-400">Posts</button>
+                    <button type="submit" class="px-4 py-2 hover:text-gray-400">Blogs</button>
                     
                     <input type="hidden" name="table_type" value="contacts">
                     <button type="submit" class="px-4 py-2 hover:text-gray-400">Feedbacks</button>
@@ -135,21 +135,21 @@
                     <th class="py-2 px-4 border-b bg-gray-100">Delete</th>
                 </tr>
                 </thead>
-                {% for section in data %}
+                {% for post in data %}
                 <tbody>
                 <tr>
-                    <td align="center" class="py-2 px-1 border-b">{{section.id}}</td>
-                    <td class="py-2 px-6 border-b">{{section.title}}</td>
-                    <td class="py-2 px-4 border-b">{{section.slug}}</td>
-                    <td align="center" class="py-2 px-2 border-b">{{section.date}}</td>
+                    <td align="center" class="py-2 px-1 border-b">{{post.id}}</td>
+                    <td class="py-2 px-6 border-b">{{post.title}}</td>
+                    <td class="py-2 px-4 border-b">{{post.slug}}</td>
+                    <td align="center" class="py-2 px-2 border-b">{{post.date}}</td>
                     <td align="center" class="py-2 px-1 border-b">
                         <button class="inline-flex text-gray-700 bg-gray-200 border-0 py-2 px-6 focus:outline-none hover:bg-gray-300 rounded text-lg">
-                            <a href="{{ url_for('editing_sec', table_type=table_type, id=section.id) }}">Edit</a>
+                            <a href="{{ url_for('editing_sec', table_type=table_type, id=post.id) }}">Edit</a>
                         </button>
                     </td>
                     <td align="center" class="py-2 px-1 border-b">
                         <button class="inline-flex text-gray-700 bg-gray-200 border-0 py-2 px-6 focus:outline-none hover:bg-gray-300 rounded text-lg">
-                            <a href="{{ url_for('delete', table_type=table_type, id=section.id) }}">Delete</a>
+                            <a href="{{ url_for('delete', table_type=table_type, id=post.id) }}">Delete</a>
                         </button>
                     </td>
                 </tr>

@@ -197,7 +197,8 @@ def delete(id, table_type):
             post = Projects.query.filter_by(id=id).first() if id != 'new' else None
         elif table_type == 'posts':
             post = Posts.query.filter_by(id=id).first() if id != 'new' else None
-            
+        elif table_type == 'contacts':
+            post = Contacts.query.filter_by(id=id).first() if id != 'new' else None
         else:
             post = None
         db.session.delete(post)
