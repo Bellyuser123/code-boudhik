@@ -3,92 +3,23 @@
   display: inline-block;
   font-size: 1.5rem; /* Adjust the font size as needed */
   color: #fff; /* Text color */
-  animation: glitch-animation 2s infinite;
+  animation: glitch-animation 4s infinite;
 }
 
 @keyframes glitch-animation {
   0% {
-    transform: translate(0);
+    text-shadow: -2px -2px 0 #00f, 2px 2px 0 #f00; /* Set initial text shadow */
   }
-  20% {
-    transform: translate(-5px, 5px);
+  25% {
+    text-shadow: 2px 2px 0 #0f0, -2px -2px 0 #f00; /* Apply color glitch */
   }
-  40% {
-    transform: translate(5px, -5px);
+  50% {
+    text-shadow: -2px 2px 0 #ff0, 2px -2px 0 #f0f; /* Apply color glitch */
   }
-  60% {
-    transform: translate(-5px, 5px);
-  }
-  80% {
-    transform: translate(5px, -5px);
+  75% {
+    text-shadow: 2px -2px 0 #f00, -2px 2px 0 #0ff; /* Apply color glitch */
   }
   100% {
-    transform: translate(0);
-  }
-}
-
-/* Pseudo-elements for glitch effect */
-.glitch-effect::before,
-.glitch-effect::after {
-  content: attr(data-text);
-  position: absolute;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
-}
-
-/* Color glitch animation for pseudo-elements */
-.glitch-effect::before {
-  background: transparent; /* Transparent background */
-  animation: color-glitch 2s infinite alternate-reverse;
-}
-
-/* Text shadow for the glitch effect */
-.glitch-effect::after {
-  color: #0f0; /* Change to desired color for the text shadow glitch effect */
-  text-shadow: 
-    -2px -2px 0 #00f, /* Change to desired color for text shadow */
-    2px 2px 0 #ff0; /* Change to desired color for text shadow */
-  animation: text-shadow-glitch 2s infinite alternate-reverse;
-}
-
-/* Color glitch animation keyframes */
-@keyframes color-glitch {
-  0%, 100% {
-    background: transparent; /* Transparent background */
-  }
-  25% {
-    background: transparent; /* Transparent background */
-  }
-  50% {
-    background: transparent; /* Transparent background */
-  }
-  75% {
-    background: transparent; /* Transparent background */
-  }
-}
-
-/* Text shadow glitch animation keyframes */
-@keyframes text-shadow-glitch {
-  0%, 100% {
-    text-shadow: 
-      -2px -2px 0 #00f, /* Change to desired color for text shadow */
-      2px 2px 0 #ff0; /* Change to desired color for text shadow */
-  }
-  25% {
-    text-shadow: 
-      -2px 2px 0 #f00, /* Change to desired color for text shadow */
-      2px -2px 0 #ff0; /* Change to desired color for text shadow */
-  }
-  50% {
-    text-shadow: 
-      -2px 2px 0 #f00, /* Change to desired color for text shadow */
-      2px -2px 0 #0f0; /* Change to desired color for text shadow */
-  }
-  75% {
-    text-shadow: 
-      -2px -2px 0 #00f, /* Change to desired color for text shadow */
-      2px 2px 0 #0f0; /* Change to desired color for text shadow */
+    text-shadow: -2px -2px 0 #00f, 2px 2px 0 #f00; /* Set final text shadow */
   }
 }
