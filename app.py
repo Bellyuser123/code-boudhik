@@ -164,7 +164,6 @@ def editing_sec(id, table_type):
             except ValueError:
                 date = datetime.now()
             content = request.form.get('content')
-            content = content.replace('\n', '<br>')
             if not id or id == 'new':
                 if table_type == 'projects':
                     post = Projects(id=None, title=title, slug=slug, image=image, date=date, content=content)
