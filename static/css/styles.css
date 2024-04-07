@@ -1,0 +1,26 @@
+/* styles.css */
+
+.glitch-text {
+    font-size: 4rem;
+    color: #fff;
+    position: relative;
+    animation: glitch 1s linear infinite;
+}
+
+@keyframes glitch {
+    0% {
+        transform: translate(0);
+    }
+    25% {
+        transform: translate(2px, -2px);
+    }
+    50% {
+        transform: translate(-2px, 2px);
+    }
+    75% {
+        transform: translate(2px, -2px);
+    }
+    100% {
+        transform: translate(-2px, 2px);
+    }
+}
