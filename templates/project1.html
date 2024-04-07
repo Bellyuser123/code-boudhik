@@ -80,7 +80,7 @@
       >
         <div class="text-center lg:w-2/3 w-full">
           <p class="mb-8 leading-relaxed">
-            {{ project.content.split('\n')|join('<br />')|safe }}
+            {{ project.content |safe }}
           </p>
         </div>
       </div>
