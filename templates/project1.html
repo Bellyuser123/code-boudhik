@@ -80,7 +80,7 @@
       >
         <div class="text-center lg:w-2/3 w-full">
           <p class="mb-8 leading-relaxed">
-            {{ project.content |safe }}
+            {{ project.content | markdown |safe }}
           </p>
         </div>
       </div>
