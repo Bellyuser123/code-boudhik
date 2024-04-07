@@ -1,168 +1,250 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Admin Panel</title>
     <script src="https://cdn.tailwindcss.com"></script>
-</head>
-<body class="relative"
-      style="background-image: url('https://cdn.glitch.global/2d9ffa8a-6165-4ffb-abec-3674c231adcf/admin_bg.jpg?v=1710244826655') ; background-size: 100%; background-position: center; background-repeat: repeat;">
-<div class="absolute inset-0 bg-black opacity-90"></div>
-<section class="h-screen flex flex-col items-center justify-center bg-cover bg-center relative"
-         style="background-image: url('https://cdn.glitch.global/2d9ffa8a-6165-4ffb-abec-3674c231adcf/admin_panel.jpg?v=1710244827985'); background-size: 80%; height: 30vh;">
-    <div class="absolute inset-0 bg-black opacity-40"></div>
-    <header class="text-gray-300 body-font bg-transparent absolute top-0 w-full z-50">
-        <div class="container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center">
-            <nav class="flex lg:w-2/5 flex-wrap items-center text-base md:ml-auto">
-                <form method="post" action="{{ url_for('dashboard') }}">
-                    <input type="hidden" name="table_type" value="projects">
-                    <button type="submit" class="px-4 py-2 hover:text-gray-400">Projects</button>
-                </form>
-                <form method="post" action="{{ url_for('dashboard') }}">
-                    <input type="hidden" name="table_type" value="posts">
-                    <button type="submit" class="px-4 py-2 hover:text-gray-400">Blogs</button>
-                </form>
-                <form method="post" action="{{ url_for('dashboard') }}">
-                    <input type="hidden" name="table_type" value="contacts">
-                    <button type="submit" class="px-4 py-2 hover:text-gray-400">Feedbacks</button>
-                </form>
-                <form method="post" action="{{ url_for('dashboard') }}">
-                    <input type="hidden" name="table_type" value="signups">
-                    <button type="submit" class="px-4 py-2 hover:text-gray-400">Signed Users</button>
-                </form>
-                <a class="px-4 py-2 hover:text-gray-400" href="/home">&larr; Back to web</a>
-            </nav>
-            <a class="flex order-first lg:order-none lg:w-1/5 title-font font-medium items-center text-gray-300 lg:items-center lg:justify-center mb-4 md:mb-0">
-                <img src="https://cdn.glitch.global/2d9ffa8a-6165-4ffb-abec-3674c231adcf/Webp.net-resizeimage.png?v=1712413208671" alt="Logo" class="w-10 h-10 rounded-full">
-                <span class="ml-3 text-xl">Code Boudhik</span>
-            </a>
-            <div class="lg:w-2/5 inline-flex lg:justify-end ml-5 lg:ml-0">
-                <button class="inline-flex items-center bg-transparent border-0 py-1 px-3 focus:outline-none hover:bg-gray-500 rounded text-base mt-4 md:mt-0">
-                    <a href="/logout">Logout</a>
-                    <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                         stroke-width="2" class="w-4 h-4 ml-1" viewBox="0 0 24 24">
-                        <path d="M5 12h14M12 5l7 7-7 7"></path>
-                    </svg>
-                </button>
-            </div>
+  </head>
+  <body
+    class="relative"
+    style="
+      background-image: url('https://cdn.glitch.global/2d9ffa8a-6165-4ffb-abec-3674c231adcf/admin_bg.jpg?v=1710244826655');
+      background-size: 100%;
+      background-position: center;
+      background-repeat: repeat;
+    "
+  >
+    <div class="absolute inset-0 bg-black opacity-90"></div>
+    <section
+      class="h-screen flex flex-col items-center justify-center bg-cover bg-center relative"
+      style="
+        background-image: url('https://cdn.glitch.global/2d9ffa8a-6165-4ffb-abec-3674c231adcf/admin_panel.jpg?v=1710244827985');
+        background-size: 80%;
+        height: 30vh;
+      "
+    >
+      <div class="absolute inset-0 bg-black opacity-40"></div>
+      <header
+        class="text-gray-300 body-font bg-transparent absolute top-0 w-full z-50"
+      >
+        <div
+          class="container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center"
+        >
+          <nav
+            class="flex lg:w-2/5 flex-wrap items-center text-base md:ml-auto"
+          >
+            <form method="post" action="{{ url_for('dashboard') }}">
+              <input type="hidden" name="table_type" value="projects" />
+              <button type="submit" class="px-4 py-2 hover:text-gray-400">
+                Projects
+              </button>
+            </form>
+            <form method="post" action="{{ url_for('dashboard') }}">
+              <input type="hidden" name="table_type" value="posts" />
+              <button type="submit" class="px-4 py-2 hover:text-gray-400">
+                Blogs
+              </button>
+            </form>
+            <form method="post" action="{{ url_for('dashboard') }}">
+              <input type="hidden" name="table_type" value="contacts" />
+              <button type="submit" class="px-4 py-2 hover:text-gray-400">
+                Feedbacks
+              </button>
+            </form>
+            <form method="post" action="{{ url_for('dashboard') }}">
+              <input type="hidden" name="table_type" value="signups" />
+              <button type="submit" class="px-4 py-2 hover:text-gray-400">
+                Signed Users
+              </button>
+            </form>
+            <a class="px-4 py-2 hover:text-gray-400" href="/home"
+              >&larr; Back to web</a
+            >
+          </nav>
+          <a
+            class="flex order-first lg:order-none lg:w-1/5 title-font font-medium items-center text-gray-300 lg:items-center lg:justify-center mb-4 md:mb-0"
+          >
+            <img
+              src="https://cdn.glitch.global/2d9ffa8a-6165-4ffb-abec-3674c231adcf/Webp.net-resizeimage.png?v=1712413208671"
+              alt="Logo"
+              class="w-10 h-10 rounded-full"
+            />
+            <span class="ml-3 text-xl">Code Boudhik</span>
+          </a>
+          <div class="lg:w-2/5 inline-flex lg:justify-end ml-5 lg:ml-0">
+            <button
+              class="inline-flex items-center bg-transparent border-0 py-1 px-3 focus:outline-none hover:bg-gray-500 rounded text-base mt-4 md:mt-0"
+            >
+              <a href="/logout">Logout</a>
+              <svg
+                fill="none"
+                stroke="currentColor"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                class="w-4 h-4 ml-1"
+                viewBox="0 0 24 24"
+              >
+                <path d="M5 12h14M12 5l7 7-7 7"></path>
+              </svg>
+            </button>
+          </div>
         </div>
-    </header>
-    <div class="text-center z-10 mt-12 md:mt-12">
-        <h4 class="text-4xl text-green-200 md:text-4xl font-bold leading-tight mb-4">ADMIN PANEL</h4>
+      </header>
+      <div class="text-center z-10 mt-12 md:mt-12">
+        <h4
+          class="text-4xl text-green-200 md:text-4xl font-bold leading-tight mb-4"
+        >
+          ADMIN PANEL
+        </h4>
         <p class="text-lg text-green-200 md:text-xl">Welcome to Admin Panel</p>
-    </div>
-</section>
+      </div>
+    </section>
 
-<section class="h-screen relative">
-    <div class="container mx-auto relative z-10">
+    <section class="h-screen relative">
+      <div class="container mx-auto relative z-10">
         <div class="pt-6">
-
-            <div class="flex items-center space-x-4">
-                <h1 class="text-lg text-gray-400 md:text-2xl pb-2">Add a new {{table_type}} :</h1>
-                <button class="inline-flex text-gray-200 bg-indigo-500 border-0 py-1 px-4 focus:outline-none hover:bg-indigo-600 rounded text-lg">
-                    <a href="{{ url_for('editing_sec', table_type=table_type, id='new') }}">ADD</a>
-                </button>
+          <div class="flex items-center space-x-4">
+            <h1 class="text-lg text-gray-400 md:text-2xl pb-2">
+              Add a new {{table_type}} :
+            </h1>
+            <button
+              class="inline-flex text-gray-200 bg-indigo-500 border-0 py-1 px-4 focus:outline-none hover:bg-indigo-600 rounded text-lg"
+            >
+              <a
+                href="{{ url_for('editing_sec', table_type=table_type, id='new') }}"
+                >ADD</a
+              >
+            </button>
+          </div>
+          <div class="flex items-center space-x-4">
+            <h1 class="text-lg text-gray-400 md:text-2xl pb-2">
+              Upload Files :
+            </h1>
+            <form
+              action="/uploader"
+              method="post"
+              enctype="multipart/form-data"
+            >
+              <input type="file" name="file1" class="text-lg text-gray-400" />
+              <button
+                type="submit"
+                class="inline-flex text-gray-200 bg-indigo-500 border-0 py-1 px-4 focus:outline-none hover:bg-indigo-600 rounded text-lg"
+              >
+                Upload
+              </button>
+            </form>
+          </div>
+          <div class="container px-1 py-3 mx-auto">
+            <div class="h-1 bg-gray-600 rounded overflow-hidden">
+              <div class="h-full bg-gray-700"></div>
             </div>
-            <div class="flex items-center space-x-4">
-                <h1 class="text-lg text-gray-400 md:text-2xl pb-2">Upload Files :</h1>
-                <form action="/uploader" method="post" enctype="multipart/form-data">
-                    <input type="file" name="file1" class="text-lg text-gray-400">
-                    <button type="submit"
-                            class="inline-flex text-gray-200 bg-indigo-500 border-0 py-1 px-4 focus:outline-none hover:bg-indigo-600 rounded text-lg">
-                        Upload
-                    </button>
-                </form>
-            </div>
-            <div class="container px-1 py-3 mx-auto">
-                <div class="h-1 bg-gray-600 rounded overflow-hidden">
-                    <div class="h-full bg-gray-700"></div>
-                </div>
-            </div>
-            <h1 class="text-lg text-gray-400 md:text-2xl pb-4">Edit/Delete {{table_type}} :</h1>
-            {% if table_type == 'contacts' %}
-            <table class="min-w-full bg-white border border-gray-300">
-                <thead>
-                    <tr>
-                        <th class="py-2 px-2 border-b bg-gray-100">Serial</th>
-                        <th class="py-2 px-2 border-b bg-gray-100">Name</th>
-                        <th class="py-2 px-4 border-b bg-gray-100">Email</th>
-                        <th class="py-2 px-4 border-b bg-gray-100">Message</th>
-                        <th class="py-2 px-4 border-b bg-gray-100">Delete</th>
-                    </tr>
-                </thead>
-                {% for contact in data %}
-                <tbody>
-                    <tr>
-                        <td align="center" class="py-2 px-1 border-b">{{ contact.id }}</td>
-                        <td align="center" class="py-2 px-1 border-b">{{ contact.name }}</td>
-                        <td class="py-2 px-6 border-b">{{ contact.email }}</td>
-                        <td class="py-2 px-4 border-b">{{ contact.message }}</td>
-                        <td align="center" class="py-2 px-1 border-b">
-                            <button class="inline-flex text-gray-700 bg-gray-200 border-0 py-2 px-6 focus:outline-none hover:bg-gray-300 rounded text-lg">
-                                <a href="{{ url_for('delete', table_type=table_type, id=contact.id) }}">Delete</a>
-                            </button>
-                        </td>
-                    </tr>
-                </tbody>
-                {% endfor %}
-            </table>
-            {% elif table_type == 'signups' %}
-            <table class="min-w-full bg-white border border-gray-300">
-                <thead>
-                    <tr>
-                        <th class="py-2 px-2 border-b bg-gray-100">Serial</th>
-                        <th class="py-2 px-4 border-b bg-gray-100">Name</th>
-                        <th class="py-2 px-4 border-b bg-gray-100">Email</th>
-                    </tr>
-                </thead>
-                {% for user in data %}
-                <tbody>
-                    <tr>
-                        <td align="center" class="py-2 px-1 border-b">{{ user.id }}</td>
-                        <td class="py-2 px-6 border-b">{{ user.name }}</td>
-                        <td class="py-2 px-4 border-b">{{ user.email }}</td>
-                    </tr>
-                </tbody>
-                {% endfor %}
-            </table>
-            {% else %}
-            <table class="min-w-full bg-white border border-gray-300">
-                <thead>
-                <tr>
-                    <th class="py-2 px-2 border-b bg-gray-100">Serial</th>
-                    <th class="py-2 px-4 border-b bg-gray-100">Title</th>
-                    <th class="py-2 px-4 border-b bg-gray-100">Slug</th>
-                    <th class="py-2 px-4 border-b bg-gray-100">Date</th>
-                    <th class="py-2 px-4 border-b bg-gray-100">Edit</th>
-                    <th class="py-2 px-4 border-b bg-gray-100">Delete</th>
-                </tr>
-                </thead>
-                {% for post in data %}
-                <tbody>
-                <tr>
-                    <td align="center" class="py-2 px-1 border-b">{{post.id}}</td>
-                    <td class="py-2 px-6 border-b">{{post.title}}</td>
-                    <td class="py-2 px-4 border-b">{{post.slug}}</td>
-                    <td align="center" class="py-2 px-2 border-b">{{post.date}}</td>
-                    <td align="center" class="py-2 px-1 border-b">
-                        <button class="inline-flex text-gray-700 bg-gray-200 border-0 py-2 px-6 focus:outline-none hover:bg-gray-300 rounded text-lg">
-                            <a href="{{ url_for('editing_sec', table_type=table_type, id=post.id) }}">Edit</a>
-                        </button>
-                    </td>
-                    <td align="center" class="py-2 px-1 border-b">
-                        <button class="inline-flex text-gray-700 bg-gray-200 border-0 py-2 px-6 focus:outline-none hover:bg-gray-300 rounded text-lg">
-                            <a href="{{ url_for('delete', table_type=table_type, id=post.id) }}">Delete</a>
-                        </button>
-                    </td>
-                </tr>
-                </tbody>
-                {% endfor %}
-            </table>
-            {% endif %}
+          </div>
+          <h1 class="text-lg text-gray-400 md:text-2xl pb-4">
+            Edit/Delete {{table_type}} :
+          </h1>
+          {% if table_type == 'contacts' %}
+          <table class="min-w-full bg-white border border-gray-300">
+            <thead>
+              <tr>
+                <th class="py-2 px-2 border-b bg-gray-100">Serial</th>
+                <th class="py-2 px-2 border-b bg-gray-100">Name</th>
+                <th class="py-2 px-4 border-b bg-gray-100">Email</th>
+                <th class="py-2 px-4 border-b bg-gray-100">Message</th>
+                <th class="py-2 px-4 border-b bg-gray-100">Delete</th>
+              </tr>
+            </thead>
+            {% for contact in data %}
+            <tbody>
+              <tr>
+                <td align="center" class="py-2 px-1 border-b">
+                  {{ contact.id }}
+                </td>
+                <td align="center" class="py-2 px-1 border-b">
+                  {{ contact.name }}
+                </td>
+                <td class="py-2 px-6 border-b">{{ contact.email }}</td>
+                <td class="py-2 px-4 border-b">{{ contact.message }}</td>
+                <td align="center" class="py-2 px-1 border-b">
+                  <button
+                    class="inline-flex text-gray-700 bg-gray-200 border-0 py-2 px-6 focus:outline-none hover:bg-gray-300 rounded text-lg"
+                  >
+                    <a
+                      href="{{ url_for('delete', table_type=table_type, id=contact.id) }}"
+                      >Delete</a
+                    >
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+            {% endfor %}
+          </table>
+          {% elif table_type == 'signups' %}
+          <table class="min-w-full bg-white border border-gray-300">
+            <thead>
+              <tr>
+                <th class="py-2 px-2 border-b bg-gray-100">Serial</th>
+                <th class="py-2 px-4 border-b bg-gray-100">Name</th>
+                <th class="py-2 px-4 border-b bg-gray-100">Email</th>
+              </tr>
+            </thead>
+            {% for user in data %}
+            <tbody>
+              <tr>
+                <td align="center" class="py-2 px-1 border-b">{{ user.id }}</td>
+                <td class="py-2 px-6 border-b">{{ user.name }}</td>
+                <td class="py-2 px-4 border-b">{{ user.email }}</td>
+              </tr>
+            </tbody>
+            {% endfor %}
+          </table>
+          {% else %}
+          <table class="min-w-full bg-white border border-gray-300">
+            <thead>
+              <tr>
+                <th class="py-2 px-2 border-b bg-gray-100">Serial</th>
+                <th class="py-2 px-4 border-b bg-gray-100">Title</th>
+                <th class="py-2 px-4 border-b bg-gray-100">Slug</th>
+                <th class="py-2 px-4 border-b bg-gray-100">Date</th>
+                <th class="py-2 px-4 border-b bg-gray-100">Edit</th>
+                <th class="py-2 px-4 border-b bg-gray-100">Delete</th>
+              </tr>
+            </thead>
+            {% for post in data %}
+            <tbody>
+              <tr>
+                <td align="center" class="py-2 px-1 border-b">{{post.id}}</td>
+                <td class="py-2 px-6 border-b">{{post.title}}</td>
+                <td class="py-2 px-4 border-b">{{post.slug}}</td>
+                <td align="center" class="py-2 px-2 border-b">{{post.date}}</td>
+                <td align="center" class="py-2 px-1 border-b">
+                  <button
+                    class="inline-flex text-gray-700 bg-gray-200 border-0 py-2 px-6 focus:outline-none hover:bg-gray-300 rounded text-lg"
+                  >
+                    <a
+                      href="{{ url_for('editing_sec', table_type=table_type, id=post.id) }}"
+                      >Edit</a
+                    >
+                  </button>
+                </td>
+                <td align="center" class="py-2 px-1 border-b">
+                  <button
+                    class="inline-flex text-gray-700 bg-gray-200 border-0 py-2 px-6 focus:outline-none hover:bg-gray-300 rounded text-lg"
+                  >
+                    <a
+                      href="{{ url_for('delete', table_type=table_type, id=post.id) }}"
+                      >Delete</a
+                    >
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+            {% endfor %}
+          </table>
+          {% endif %}
         </div>
-    </div>
-</section>
-
-</body>
+      </div>
+    </section>
+  </body>
 </html>
