@@ -346,27 +346,27 @@
 @keyframes movement {
   0% {
     top: 0px;
-    left: -20px;
+    left: -15px;
   }
 
   15% {
-    top: 10px;
-    left: 10px;
+    top: 7px;
+    left: 7px;
   }
 
   60% {
-    top: 5px;
-    left: -10px;
+    top: 3px;
+    left: -7px;
   }
 
   75% {
-    top: -5px;
-    left: 20px;
+    top: -3px;
+    left: 15px;
   }
 
   100% {
-    top: 10px;
-    left: 5px;
+    top: 7px;
+    left: 3px;
   }
 }
 
@@ -403,10 +403,6 @@
   93% {
     opacity: 0;
   }
-}
-
-.font {
-  animation: font 7s step-end infinite;
 }
 
 @keyframes font {
