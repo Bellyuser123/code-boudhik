@@ -80,7 +80,9 @@
       >
         <div class="text-center lg:w-2/3 w-full">
           <p class="mb-8 leading-relaxed">
+            {% filter markdown %}
             {{ project.content | markdown |safe }}
+            {% endfilter %}
           </p>
         </div>
       </div>
