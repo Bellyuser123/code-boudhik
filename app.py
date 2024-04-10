@@ -41,7 +41,7 @@ class Contacts(db.Model):
     name = db.Column(db.String(80), nullable=False)
     email = db.Column(db.String(120), nullable=False)
     message = db.Column(db.Text, nullable=False)
-    date = db.Column(db.DateTime, nullable=False)
+    date = db.Column(db.String)
 
 
 class Posts(db.Model):
@@ -50,7 +50,7 @@ class Posts(db.Model):
     content = db.Column(db.String(120), nullable=False)
     slug = db.Column(db.String(100), nullable=False)
     image = db.Column(db.String(255), nullable=False)
-    date = db.Column(db.DateTime, nullable=False)
+    date = db.Column(db.String)
 
 
 class Projects(db.Model):
@@ -59,7 +59,7 @@ class Projects(db.Model):
     content = db.Column(db.String(120), nullable=False)
     slug = db.Column(db.String(100), nullable=False)
     image = db.Column(db.String(255), nullable=False)
-    date = db.Column(db.DateTime, nullable=False)
+    date = db.Column(db.String)
 
 
 class Signups(db.Model):
@@ -153,9 +153,9 @@ def editing_sec(id, table_type):
             image = request.form.get('image')
             date_str = request.form.get('date')
             try:
-                date = datetime.strptime(date_str, '%Y-%m-%d')
+                date = datetime.strptime(date_str, '%Y-%m-%d %H:%M')
             except ValueError:
-                date = datetime.now()
+                date = datetime.now().replace(second=0, microsecond=0)
             content = request.form.get('content')
             if not id or id == 'new':
                 if table_type == 'projects':
