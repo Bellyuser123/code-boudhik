@@ -4,6 +4,7 @@ from flask_sqlalchemy import SQLAlchemy
 from werkzeug.utils import secure_filename
 from flask_mail import Mail, Message
 import requests
+import bleach
 from io import BytesIO
 import math
 from datetime import datetime
