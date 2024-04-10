@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request, session, redirect, flash
 from flaskext.markdown import Markdown
 from flask_sqlalchemy import SQLAlchemy
+from sqlalchemy import DateTime
 from werkzeug.utils import secure_filename
 from flask_mail import Mail, Message
 import requests
@@ -41,25 +42,25 @@ class Contacts(db.Model):
     name = db.Column(db.String(80), nullable=False)
     email = db.Column(db.String(120), nullable=False)
     message = db.Column(db.Text, nullable=False)
-    date = db.Column(db.String)
+    date = db.Column(DateTime)
 
 
 class Posts(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(100), nullable=False)
-    content = db.Column(db.String(120), nullable=False)
+    content = db.Column(db.Text, nullable=False)
     slug = db.Column(db.String(100), nullable=False)
     image = db.Column(db.String(255), nullable=False)
-    date = db.Column(db.String)
+    date = db.Column(DateTime)
 
 
 class Projects(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(100), nullable=False)
-    content = db.Column(db.String(120), nullable=False)
+    content = db.Column(db.Text, nullable=False)
     slug = db.Column(db.String(100), nullable=False)
     image = db.Column(db.String(255), nullable=False)
-    date = db.Column(db.String)
+    date = db.Column(DateTime)
 
 
 class Signups(db.Model):
