@@ -165,7 +165,7 @@ def editing_sec(id, table_type):
                 date = datetime.strptime(date_str, '%Y-%m-%d')
             except ValueError:
                 date = datetime.now()
-            content = request.form.get('content')
+            content = bleach.clean(request.form['content'], tags=['h1', 'h2', 'h3', 'p', 'br'])
             if not id or id == 'new':
                 if table_type == 'projects':
                     post = Projects(id=None, title=title, slug=slug, image=image, date=date, content=content)
@@ -181,6 +181,7 @@ def editing_sec(id, table_type):
                     post = Posts.query.filter_by(id=id).first()
 
                 if post:
+                    content = bleach.clean(request.form['content'], tags=['h1', 'h2', 'h3', 'p', 'br'])
                     post.title = title
                     post.slug = slug
                     post.image = image
