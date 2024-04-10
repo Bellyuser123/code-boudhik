@@ -4,7 +4,6 @@ from flask_sqlalchemy import SQLAlchemy
 from werkzeug.utils import secure_filename
 from flask_mail import Mail, Message
 import requests
-import bleach
 from io import BytesIO
 import math
 from datetime import datetime
@@ -84,12 +83,7 @@ def home():
 @app.route("/proj/<string:proj_slug>", methods=['GET'])
 def project_route(proj_slug):
     project = Projects.query.filter_by(slug=proj_slug).first()
-    if project:
-        sanitized_content = bleach.clean(project.content, tags=['h1', 'h2', 'h3', 'p', 'br'], strip=True)
-        project.content = sanitized_content
-        return render_template('project1.html', project=project)
-    else:
-        return render_template('404.html')
+    return render_template('project1.html', params=params, project=project)
 
 
 @app.route('/projects')
@@ -102,9 +96,6 @@ def proj_sec():
     projects = projects[offset:offset + int(params['num_side_proj'])]
     prev = page - 1 if page > 1 else '#'
     after = page + 1 if page < last else '#'
-    for project in projects:
-        sanitized_content = bleach.clean(project.content, tags=['h1', 'h2', 'h3', 'p', 'br'], strip=True)
-        project.content = sanitized_content
     return render_template('projects.html', params=params, projects=projects, prev=prev, after=after)
 
 
@@ -116,16 +107,12 @@ def dashboard():
             table_type = request.form.get('table_type', 'projects')
             if table_type == 'projects':
                 data = Projects.query.all()
-                print("projects")
             elif table_type == 'posts':
                 data = Posts.query.all()
-                print("posts")
             elif table_type == 'contacts':
                 data = Contacts.query.all()
-                print("contacts")
             elif table_type == 'signups':
                 data = Signups.query.all()
-                print("signups")
             else:
                 data = []
             return render_template('dashboard.html', params=params, data=data, table_type=table_type)
@@ -139,16 +126,12 @@ def dashboard():
             table_type = request.form.get('table_type', 'projects')
             if table_type == 'projects':
                 data = Projects.query.all()
-                print("projects")
             elif table_type == 'posts':
                 data = Posts.query.all()
-                print("posts")
             elif table_type == 'contacts':
                 data = Contacts.query.all()
-                print("contacts")
             elif table_type == 'signups':
                 data = Signups.query.all()
-                print("signups")
             else:
                 data = []
             return render_template('dashboard.html', params=params, data=data, table_type=table_type)
@@ -173,7 +156,7 @@ def editing_sec(id, table_type):
                 date = datetime.strptime(date_str, '%Y-%m-%d')
             except ValueError:
                 date = datetime.now()
-            content = bleach.clean(request.form['content'], tags=['h1', 'h2', 'h3', 'p', 'br'], strip=True)
+            content = request.form.get('content')
             if not id or id == 'new':
                 if table_type == 'projects':
                     post = Projects(id=None, title=title, slug=slug, image=image, date=date, content=content)
@@ -189,7 +172,6 @@ def editing_sec(id, table_type):
                     post = Posts.query.filter_by(id=id).first()
 
                 if post:
-                    content = bleach.clean(request.form['content'], tags=['h1', 'h2', 'h3', 'p', 'br'], strip=True)
                     post.title = title
                     post.slug = slug
                     post.image = image
