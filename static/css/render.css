@@ -1,37 +1,35 @@
-/* styles.css */
-
-/* Custom styles for all heading tags */
-h1, h2, h3, h4, h5, h6 {
-  font-family: Arial, sans-serif; /* Example font family */
-  color: #333; /* Example color */
+.markdown-content h1 {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #007bff; /* Example color */
 }
 
-h1 {
-  font-size: 2rem; /* Example font size for h1 */
-  font-weight: bold; /* Example font weight for h1 */
+.markdown-content h2 {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #28a745; /* Example color */
 }
 
-h2 {
-  font-size: 1.5rem; /* Example font size for h2 */
-  font-weight: bold; /* Example font weight for h2 */
+.markdown-content h3 {
+  font-size: 1.25rem;
+  font-weight: bold;
+  color: #fd7e14; /* Example color */
 }
 
-h3 {
-  font-size: 1.25rem; /* Example font size for h3 */
-  font-weight: bold; /* Example font weight for h3 */
+.markdown-content h4 {
+  font-size: 1.125rem;
+  font-weight: bold;
+  color: #6610f2; /* Example color */
 }
 
-h4 {
-  font-size: 1.125rem; /* Example font size for h4 */
-  font-weight: bold; /* Example font weight for h4 */
+.markdown-content h5 {
+  font-size: 1rem;
+  font-weight: bold;
+  color: #dc3545; /* Example color */
 }
 
-h5 {
-  font-size: 1rem; /* Example font size for h5 */
-  font-weight: bold; /* Example font weight for h5 */
-}
-
-h6 {
-  font-size: 0.875rem; /* Example font size for h6 */
-  font-weight: bold; /* Example font weight for h6 */
+.markdown-content h6 {
+  font-size: 0.875rem;
+  font-weight: bold;
+  color: #17a2b8; /* Example color */
 }
