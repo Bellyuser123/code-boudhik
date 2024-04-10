@@ -1,35 +1,35 @@
 .markdown-content h1 {
   font-size: 2rem;
   font-weight: bold;
-  color: #007bff; /* Example color */
+  color: #70aadb; /* Example color */
 }
 
 .markdown-content h2 {
   font-size: 1.5rem;
   font-weight: bold;
-  color: #28a745; /* Example color */
+  color: #70db99; /* Example color */
 }
 
 .markdown-content h3 {
   font-size: 1.25rem;
   font-weight: bold;
-  color: #fd7e14; /* Example color */
+  color: #ffb27a; /* Example color */
 }
 
 .markdown-content h4 {
   font-size: 1.125rem;
   font-weight: bold;
-  color: #6610f2; /* Example color */
+  color: #b99ef0; /* Example color */
 }
 
 .markdown-content h5 {
   font-size: 1rem;
   font-weight: bold;
-  color: #dc3545; /* Example color */
+  color: #f0989a; /* Example color */
 }
 
 .markdown-content h6 {
   font-size: 0.875rem;
   font-weight: bold;
-  color: #d4edf1; /* Example color */
+  color: #7adde2; /* Example color */
 }
