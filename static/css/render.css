@@ -39,3 +39,17 @@
   height: 1px;
   background-color: #e0e0e0; /* Example color */
 }
+
+.markdown-content ol,
+.markdown-content ul {
+  margin-left: 1.5rem; /* Adjust as needed */
+  list-style-position: inside; /* Place the list marker inside the list item */
+}
+
+.markdown-content ol {
+  list-style-type: decimal; /* Style for ordered lists (numbers) */
+}
+
+.markdown-content ul {
+  list-style-type: disc; /* Style for unordered lists (bullets) */
+}
