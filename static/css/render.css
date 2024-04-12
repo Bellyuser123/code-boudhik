@@ -40,16 +40,33 @@
   background-color: #e0e0e0; /* Example color */
 }
 
-.markdown-content ol,
-.markdown-content ul {
+.markdown-content ol {
+  list-style-type: decimal; /* Style for ordered lists (numbers) */
   margin-left: 1.5rem; /* Adjust as needed */
   list-style-position: inside; /* Place the list marker inside the list item */
 }
 
-.markdown-content ol {
-  list-style-type: decimal; /* Style for ordered lists (numbers) */
+.markdown-content ul {
+  margin-left: 1.5rem; /* Adjust as needed */
+  list-style-position: inside; /* Place the list marker inside the list item */
+  list-style-type: disc; /* Style for unordered lists (bullets) */
 }
 
-.markdown-content ul {
-  list-style-type: disc; /* Style for unordered lists (bullets) */
+.markdown-content pre {
+  font-size: 0.875rem;
+  font-weight: bold;
+  color: #7adde2; /* Example color */
+  background-color: #f0f0f0; /* Example background color */
+  padding: 10px;
+  border-radius: 5px;
+  overflow-x: auto;
+}
+
+.markdown-content code {
+  font-size: 0.875rem;
+  font-weight: bold;
+  color: #7adde2; /* Example color */
+  background-color: #f0f0f0; /* Example background color */
+  padding: 2px 4px;
+  border-radius: 3px;
 }
