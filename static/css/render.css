@@ -52,6 +52,18 @@
   list-style-type: disc; /* Style for unordered lists (bullets) */
 }
 
+.markdown-content li {
+  margin-bottom: 0.5rem; /* Adjust spacing between list items */
+  font-size: 1rem; /* Adjust font size for list items */
+  line-height: 1.5; /* Adjust line height for better readability */
+}
+
+.markdown-content ul ul,
+.markdown-content ol ol {
+  margin-left: 1.5rem; /* Adjust indentation for nested lists */
+  list-style-type: circle; /* Style for nested unordered lists */
+}
+
 .markdown-content pre {
   font-size: 0.875rem;
   font-weight: bold;
