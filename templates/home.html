@@ -1,5 +1,6 @@
 <head>
   <title>Home Page</title>
+  <link rel="stylesheet" href="../static/css/styles.css" />
 </head>
 {% extends "layout.html" %} {% block body %}
 
@@ -25,10 +26,11 @@
         coding universe.
       </p>
       <div class="flex justify-center">
-        <button
-          class="inline-flex text-gray-700 bg-gray-200 border-0 py-2 px-6 focus:outline-none hover:bg-gray-300 rounded text-lg"
-        >
-          Keep Reading
+        <button class="learn-more">
+          <span class="circle" aria-hidden="true">
+          <span class="icon arrow"></span>
+          </span>
+          <span class="button-text">Keep Reading</span>
         </button>
       </div>
     </div>
