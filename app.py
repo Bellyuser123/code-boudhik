@@ -196,7 +196,7 @@ def editing_sec(id, table_type):
             post = Posts.query.filter_by(id=id).first()
         return render_template('editing.html', params=params, id=id, table_type=table_type, post=post)
     else:
-        return render_template('404.html')
+      return render_template('404.html')
 
 
 @app.route("/delete/<string:table_type>/<string:id>")
