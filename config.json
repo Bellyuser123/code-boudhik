@@ -3,13 +3,13 @@
     "local_server": "True",
     "local_uri": "sqlite:///",
     "prod_uri": "sqlite:///",
-    "gmail_user": "boudhik.chawda72@gmail.com",
-    "gmail_passwd": "pgrk quxd zxoo secr",
+    "gmail_user": "app.py",
+    "gmail_passwd": "app.py",
     "num_side_proj": 2,
     "num_side_post": 5,
     "num_index": 3,
-    "admin_user": "BOT_boudhik_super",
-    "admin_password": "I Love Boudhik",
+    "admin_user": "app.py",
+    "admin_password": "app.py",
     "upload_location": "static/uploads"
   }
 }

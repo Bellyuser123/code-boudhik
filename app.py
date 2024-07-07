@@ -16,9 +16,16 @@ local_server = True
 with open('config.json') as c:
     params = json.load(c)["params"]
 
+load_dotenv()
+
 app = Flask(__name__)
+app.config.update(config['params'])
 app.secret_key = 'gand-me-danda-le-teri-gand-me-danda-le'
 app.config['UPLOAD_FOLDER'] = params['upload_location']
+params['params']['gmail_user'] = os.getenv('gmail_user')
+config['params']['gmail_passwd'] = os.getenv('gmail_passwd')
+config['params']['admin_user'] = os.getenv('admin_user')
+config['params']['admin_password'] = os.getenv('admin_password')
 base_dir = os.path.abspath(os.path.dirname(__file__))
 if local_server:
     app.config['SQLALCHEMY_DATABASE_URI'] = params['local_uri'] + os.path.join(base_dir, 'data', 'database.db')
