@@ -9,6 +9,7 @@ from io import BytesIO
 import math
 from datetime import datetime
 import os
+from dotenv import load_dotenv
 import json
 
 local_server = True
