@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request, session, redirect, flash
-from flask_markdown import Markdown
+from markdown import markdown
+from markupsafe import Markup
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import DateTime
 from werkzeug.utils import secure_filename
@@ -41,7 +42,7 @@ app.config.update(
     MAIL_DEFAULT_SENDER=params['gmail_user']
 )
 mail = Mail(app)
-Markdown(app)
+html = Markup(markdown(some_markdown_string))
 db = SQLAlchemy(app)
 
 
