@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request, session, redirect, flash
-from flaskext.markdown import Markdown
+from flask_markdown import Markdown
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import DateTime
 from werkzeug.utils import secure_filename
