@@ -6,3 +6,4 @@ werkzeug
 gunicorn==21.2.0
 markdown
 markupsafe
+requests
