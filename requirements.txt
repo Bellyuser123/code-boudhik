@@ -3,3 +3,4 @@ Flask-SQLAlchemy
 Flask_mail
 sqlalchemy
 werkzeug
+gunicorn==21.2.0
