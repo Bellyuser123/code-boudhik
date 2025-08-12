@@ -4,7 +4,6 @@ Flask_mail
 sqlalchemy
 werkzeug
 gunicorn==21.2.0
-markdown
-markupsafe
+flaskext.markdown 
 requests
 python-dotenv
